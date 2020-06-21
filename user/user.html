@@ -1,0 +1,153 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel = "stylesheet"
+      href = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
+      <link href="assets/img/LOGO.png" rel="shortcut icon" />
+  <link href="/assets/img/LOGO.png" rel="apple-touch-icon-precomposed" />
+  <link rel="stylesheet" href="/assets/css/same.css">
+  <link rel="stylesheet" href="user.css">
+  <!-- <link rel="stylesheet" href="/assets/css/style.css"> -->
+  
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital@1&display=swap" rel="stylesheet">
+  
+  <title>Blog</title>
+  </head>
+  <body class="grey lighten-3">
+      <header id="index-header">
+          <div class="top-center">
+          </div>
+        </header>
+    <!-- NAVBAR -->
+    <nav class="grey lighten-4">
+      <div class="nav-wrapper container">
+        <a href="/index.html" class="brand-logo">
+          <img src="/assets/img/LOGO.png" style="width: 120px; margin-top: 10px;">
+        </a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li class="logged-in">
+                <a href="#" class="grey-text log_out" style="font-size: 1.1rem;font-weight: bolder;">文章列表</a>
+              </li>
+              <li class="logged-in">
+                <a href="#" class="grey-text log_out" style="font-size: 1.1rem;font-weight: bolder;">我的文章</a>
+              </li>
+            <li class="logged-in">
+              <a href="#" class="grey-text log_out" id="logout" style="font-size: 1.1rem;font-weight: bolder;">登出</a>
+            </li>
+            <li class="logged-in">
+              <a href="#" class="grey-text modal-trigger hidden" data-target="modal-create">Create Guide</a>
+            </li>
+            <li class="logged-out">
+              <a href="#" class="grey-text modal-trigger log_in" data-target="modal-login" style="font-size: 1.1rem;font-weight: bolder;">登入</a>
+            </li>
+            <li class="logged-out">
+              <a href="#" class="grey-text modal-trigger sign_up" data-target="modal-signup" style="font-size: 1.1rem;font-weight: bolder;">註冊</a>
+            </li>
+          </span>
+        </ul>
+        <div class="menu right">
+            <img src="/assets/boot.png" alt="">
+        </div>
+        <div class="hamburger">
+          <div class="close">
+              <div class="close-img"><img src="/assets/img/close.png" alt=""></div>
+          </div>
+          <p class="logout-rwd log_out" id="logout">登出</p>
+          <p class="login-rwd modal-trigger log_in" data-target="modal-login">登入</p>
+          <p class="signup-rwd modal-trigger sign_up" data-target="modal-signup">註冊</p>
+        </div>
+      </div>
+    </nav>
+
+
+  <!-- CREATE GUIDE MODAL -->
+  <!-- <div id="modal-create" class="modal">
+    <div class="modal-content">
+      <h4>Create Guide</h4><br />
+      <form id="create-form">
+        <div class="input-field">
+          <input type="text" id="title" required>
+          <label for="title">Guide Title</label>
+        </div>
+        <div class="input-field">
+          <textarea id="content" class="materialize-textarea" required></textarea>
+          <label for="content">Guide Content</label>
+        </div>
+        <button class="btn yellow darken-2 z-depth-0">Create</button>
+      </form>
+    </div>
+  </div> -->
+
+  <!-- GUIDE LIST -->
+  <div class="container" style="margin-top: 40px;">
+    <div id="content"></div>
+  </div>
+  <footer class = "page-footer" style = "background-color: rgb(42, 55, 80);">
+    <div class = "row">
+        <div class = "col s12 m6 l6">
+          <h5 class = "white-text">Vivian's Blog</h5>
+        </div>
+        
+        <div class = "col">
+          <ul>
+              <li><a href = "#" class = "grey-text text-lighten-4 right">
+                常見問題</a></li>
+              <li><a href = "#" class = "grey-text text-lighten-4 right">
+                關於我</a></li>
+          </ul>
+        </div>
+    </div>
+    
+    <div class = "footer-copyright">
+        <div class = "container">
+          © 2020 
+          <a class = "grey-text text-lighten-4 right" href = "#!">Links</a>
+        </div>
+    </div>         
+    </footer>
+
+
+
+
+    <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-analytics.js"></script>
+    <!-- Initialize Firebase -->
+    <!-- <script src="/__/firebase/init.js"></script> -->
+  <script>
+    var firebaseConfig = {
+    apiKey: "AIzaSyA7CcEZ8Cm6BfNDXzSy2GNqw4KRhEKyrGk",
+    authDomain: "blog-8f917.firebaseapp.com",
+    databaseURL: "https://blog-8f917.firebaseio.com",
+    projectId: "blog-8f917",
+    storageBucket: "blog-8f917.appspot.com",
+    messagingSenderId: "472701333427",
+    appId: "1:472701333427:web:ab7be97f749227419965c6",
+    measurementId: "G-K0927WPTBW"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+  
+    //make auth and firestor references
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+  
+    // update firebase settings
+    // db.settings({timestampsInSnaposhots : true});
+  </script>
+  <!-- Compiled and minified JavaScript -->
+  
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>        
+    
+    <script src="/scripts/auth.js"></script>
+    <script src="/scripts/index.js"></script>
+    <script src="/scripts/same.js"></script>
+</body>

@@ -1,0 +1,261 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel = "stylesheet"
+      href = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
+      <link href="assets/img/LOGO.png" rel="shortcut icon" />
+  <link href="assets/img/LOGO.png" rel="apple-touch-icon-precomposed" />
+  <link rel="stylesheet" href="assets/css/index.css">
+  <link rel="stylesheet" href="assets/css/same.css">
+  <!-- <link rel="stylesheet" href="/assets/css/style.css"> -->
+  
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital@1&display=swap" rel="stylesheet">
+  
+  <title>Blog</title>
+  </head>
+  <body class="grey lighten-3">
+      <header id="index-header">
+          <div class="top-center">
+          </div>
+        </header>
+    <!-- NAVBAR -->
+    <nav class="grey lighten-4">
+      <div class="nav-wrapper container">
+        <a href="#" class="brand-logo">
+          <img src="assets/img/LOGO.png" style="width: 120px;">
+        </a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li class="logged-in" style="display:none;">
+              <a href="#" class="grey-text" style="font-size: 1.1rem;font-weight: bolder;">文章列表</a>
+          </li>
+          <li class="logged-in" style="display:none;">
+            <a href="#" class="grey-text modal-trigger" data-target="modal-create" style="font-size: 1.1rem;font-weight: bolder;">新增文章</a>
+          </li>
+          <li class="logged-in" style="display:none;">
+            <a href="#" class="grey-text modal-trigger" data-target="modal-account" style="font-size: 1.1rem;font-weight: bolder;">我的帳戶</a>
+          </li>
+          <li class="logged-in" style="display:none;">
+            <a href="#" class="grey-text" id="logout" style="font-size: 1.1rem;font-weight: bolder;">登出</a>
+          </li>
+          <li class="logged-out" style="display:none;" >
+            <a href="#" class="grey-text modal-trigger" data-target="modal-login" style="font-size: 1.1rem;font-weight: bolder;">登入</a>
+          </li>
+          <li class="logged-out" style="display:none;" >
+            <a href="#" class="grey-text modal-trigger" data-target="modal-signup" style="font-size: 1.1rem;font-weight: bolder;">註冊</a>
+          </li>
+        </span>
+      </ul>
+        <div class="menu right">
+            <img src="assets/boot.png" alt="">
+        </div>
+        <div class="hamburger">
+          <div class="close">
+              <div class="close-img"><img src="assets/img/close.png" alt=""></div>
+          </div>
+          <p class="logout-rwd logged-in" >文章列表</p>
+          <p class="logout-rwd logged-in modal-trigger" data-target="modal-create">新增文章</p>
+          <p class="logout-rwd logged-in modal-trigger" data-target="modal-account">我的帳戶</p>
+          <p class="logout-rwd logged-in" id="logout">登出</p>
+          <p class="login-rwd modal-trigger logged-out" data-target="modal-login">登入</p>
+          <p class="signup-rwd modal-trigger logged-out" data-target="modal-signup">註冊</p>
+        </div>
+      </div>
+    </nav>
+    <div class="row" style="margin:0;">
+        <div class="col" style="width:200px;height:50px;"></div>
+    </div>
+    <div class="row logged-out" style="display:none;">
+          <div class="col s12 m5" >
+              <h4 class="title">Welcome to my Blog~~</h4>
+              <!-- <button id="sign_google">使用google登入</button> -->
+              <div class="image">
+                  <img class="homepage" src="assets/img/homepage.png" alt="svg" >
+              </div>
+          </div>
+          <div class = "register col s12 m6 card" >
+              <div class = "card-content">
+                 <span class = "card-title"></span>                 
+                <h4>註冊 Sign up</h4><br />
+                <form action="#" id="signup-form">
+                  <label for="username" style="font-family:Microsoft JhengHei;">使用者名稱NAME<em>&#x2a;</em></label>
+                  <input id="username" name="username" required="" type="text" />
+
+                  <label for="signup-email" >郵件EMAIL<em>&#x2a;</em></label>
+                  <input id="signup-email" name="signup-email" required="" type="email" />
+
+                  <label for="customerPassword">密碼PASSWORD<em>&#x2a;</em></label>
+                  <input id="signup-password" name="customerPassword" required="" type="password"  />
+                  <!-- <label for="customerIdentity">註冊身分IDENTITY<em>&#x2a;</em></label>
+                  <input id="customerIdentity" name="customerIdentity" required="" type="text" placeholder="老師/學生" /> -->
+                  <!-- <button id="check" onclick="window.location='/teacher/teacher.html';">確定</button> -->
+                  <button class="btn" id="check" style="background:#1E2D61;">確定</button>
+                </form>
+                
+              </div>
+              
+              <div class="col s12 m1"></div>
+           </div>
+    </div>
+
+  <!-- SIGN UP MODAL -->
+  <div id="modal-signup" class="modal">
+    <div class="modal-content">
+      <div class="contact-us"> 
+        <h4>註冊 Sign up</h4><br />
+        <form action="#" id="signup-form">
+          
+          <label for="username" style="font-family:Microsoft JhengHei;">使用者名稱NAME<em>&#x2a;</em></label>
+          <input id="username" name="username" required="" type="text" />
+
+          <label for="login-email" style="font-family:Microsoft JhengHei;">郵件EMAIL<em>&#x2a;</em></label>
+          <input id="login-email" name="login-email" required="" type="email" />
+        
+        
+          <label for="login-password" style="font-family:Microsoft JhengHei;">密碼PASSWORD<em>&#x2a;</em></label>
+          <input id="login-password" name="login-password" required="" type="password"  />
+          
+
+          <button class="btn" id="check" style="background:#1E2D61;">確定</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOGIN MODAL -->
+  <div id="modal-login" class="modal">
+    <div class="modal-content">
+      <div class="contact-us">
+        <h4>登入 Login in</h4><br />
+        <form action="#" id="login-form">
+        
+          <label for="login-email" style="font-family:Microsoft JhengHei;">郵件EMAIL<em>&#x2a;</em></label>
+          <input id="login-email" name="login-email" required="" type="email" />
+        
+        
+          <label for="login-password" style="font-family:Microsoft JhengHei;">密碼PASSWORD<em>&#x2a;</em></label>
+          <input id="login-password" name="login-password" required="" type="password"  />
+        
+            <button class="btn" style="background:#1E2D61;">確定</button>
+        </form>
+      </div>
+      
+    </div>
+  </div>
+
+  <!-- ACCOUNT MODAL -->
+  <div id="modal-account" class="modal">
+    <div class="modal-content center-align">
+      <h4>我的帳戶</h4><br />
+      <div class="account-details"></div>
+      <div class="account-extras"></div>
+    </div>
+  </div>
+
+  <!-- CREATE GUIDE MODAL -->
+  <div id="modal-create" class="modal">
+    <div class="modal-content">
+      <div class="contact-us">
+        
+        <h4>新增文章Create Post</h4><br />
+        <form action="#" id="create-post">
+          <label for="title" style="font-family:Microsoft JhengHei;">文章標題TITLE<em>&#x2a;</em></label>
+          <input id="title" name="title" required="" type="text" />
+          
+          <label for="content" style="font-family:Microsoft JhengHei;">文章內容CONTENT<em>&#x2a;</em></label>
+          <textarea id="content" name="content" required="" rows="4"></textarea>
+          <button class="btn" style="background:#1E2D61;">確定</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- GUIDE LIST -->
+  <div class="container logged-in" style="margin-top: 40px; display:none;">
+    <!-- <ul class="collapsible post">
+
+    </ul> -->
+    <h4>文章列表</h4>
+    <div class="post"></div>
+    <div class="comment" id="create-comment">
+    </div>
+    
+  </div>
+
+
+  
+  <footer class = "page-footer" style = "background-color: rgb(42, 55, 80);">
+    <div class = "row">
+        <div class = "col s12 m6 l6">
+          <h5 class = "white-text">Vivian's Blog</h5>
+        </div>
+        
+        <div class = "col">
+          <ul>
+              <li><a href = "#" class = "grey-text text-lighten-4 right">
+                常見問題</a></li>
+              <li><a href = "#" class = "grey-text text-lighten-4 right">
+                關於我</a></li>
+          </ul>
+        </div>
+    </div>
+    
+    <div class = "footer-copyright">
+        <div class = "container">
+          © 2020 
+          <a class = "grey-text text-lighten-4 right" href = "#!">Links</a>
+        </div>
+    </div>         
+    </footer>
+
+
+
+
+    <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-analytics.js"></script>
+    <!-- Initialize Firebase -->
+    <!-- <script src="/__/firebase/init.js"></script> -->
+  <script>
+    var firebaseConfig = {
+    apiKey: "AIzaSyA7CcEZ8Cm6BfNDXzSy2GNqw4KRhEKyrGk",
+    authDomain: "blog-8f917.firebaseapp.com",
+    databaseURL: "https://blog-8f917.firebaseio.com",
+    projectId: "blog-8f917",
+    storageBucket: "blog-8f917.appspot.com",
+    messagingSenderId: "472701333427",
+    appId: "1:472701333427:web:ab7be97f749227419965c6",
+    measurementId: "G-K0927WPTBW"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+  
+    //make auth and firestor references
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+  
+    // update firebase settings
+    // db.settings({timestampsInSnaposhots : true});
+  </script>
+  <!-- Compiled and minified JavaScript -->
+  
+    <script src="scripts/auth.js"></script>
+    <script src="scripts/index.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>        
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
+    <script src="scripts/same.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <script src="http://fb.me/react-0.8.0.js"></script>
+    <script src="http://fb.me/JSXTransformer-0.8.0.js"></script>
+    <script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+    
+    
+    
+</body>

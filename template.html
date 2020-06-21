@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script type="text/javascript" src="js/react.min.js"></script>
+        <script type="text/javascript" src="js/react-dom.min.js"></script>
+        <script type="text/javascript" src="js/browser.min.js"></script>
+    </head>
+    <body>
+        <boyi-view></boyi-view>
+
+        <script type="text/babel">
+            let Comment = React.createClass({
+                getInitialState(){
+                    return {
+                        msg:"我是不是你最疼爱的人",
+                        changeMsg:""
+                    }
+                },
+                textChange(){
+                    this.setState({
+                        changeMsg:this.refs['txt'].value
+                    })
+                    this.refs['txt'].value='';
+                },
+                render(){
+                    return  <div className="comment">
+                                <input type="text" name="" placeholder="" ref="txt"/>
+                                <input type="button" name="" value="添加留言" onClick={this.textChange}/>
+                                <Child  textList={this.state.changeMsg}/>
+                            </div>
+                }
+            })
+
+            let Child = React.createClass({
+                getInitialState(){
+                    return {
+                        arr:[],
+                        deleteMsg:null
+                    }
+                },
+                deleteMsg(ev){
+                    ev.target.parentNode.remove();
+                },
+                render(){
+                    let _this=this;
+                    let arr=this.state.arr;
+                    if(this.props.textList.length!=0){
+                        arr.unshift(this.props.textList);
+                    }
+                    
+                    return  <ul>
+                                  {
+                                    this.state.arr.map(function(val,index){
+                                        return <li key={index}>{val} <a onClick={_this.deleteMsg}>删除</a></li> 
+                                    })
+                                  }
+                            </ul>
+                    
+                }
+            })
+
+            ReactDOM.render(
+                <Comment />,
+                document.querySelector('boyi-view')
+            )
+        </script>
+    </body>
+</html>
