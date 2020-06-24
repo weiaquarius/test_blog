@@ -33,8 +33,13 @@
 <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-database.js"></script>  
 <!-- storage -->
 <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-storage.js"></script>  
-  <!-- Compiled and minified JavaScript -->
+<!-- Compiled and minified JavaScript -->
+<script src = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+<script src="http://fb.me/react-0.8.0.js"></script>
+<script src="http://fb.me/JSXTransformer-0.8.0.js"></script>
 
 
   <title>Blog</title>
@@ -74,6 +79,9 @@
                 <label for="signup-email" style="font-family:Microsoft JhengHei;color:rgba(255, 255, 255, 0.623);font-weight: bold;">郵件EMAIL<em>&#x2a;</em></label>
               <input id="signup-email" name="signup-email" required="" type="email" />
               <small id="emailHelp" class="form-text"style="color:rgba(255, 255, 255, 0.5);">We'll never share your email with anyone else.</small>
+              <div class="invalid-feedback">
+                Please provide a valid city.
+              </div>
               </div>
   
               <div class="form-group">
@@ -137,15 +145,25 @@
     </footer>
   </div>
     
-  <script src = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
   
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-
-  <script src="http://fb.me/react-0.8.0.js"></script>
-  <script src="http://fb.me/JSXTransformer-0.8.0.js"></script>
   
   
   <!-- include js file -->
+  <script>
+    var firebaseConfig = {
+          apiKey: "AIzaSyA7CcEZ8Cm6BfNDXzSy2GNqw4KRhEKyrGk",
+          authDomain: "blog-8f917.firebaseapp.com",
+          databaseURL: "https://blog-8f917.firebaseio.com",
+          projectId: "blog-8f917",
+          storageBucket: "blog-8f917.appspot.com",
+          messagingSenderId: "472701333427",
+          appId: "1:472701333427:web:ab7be97f749227419965c6",
+          measurementId: "G-K0927WPTBW"
+        };
+        firebase.initializeApp(firebaseConfig);
+        firebase.auth.Auth.Persistence.LOCAL;
+        firebase.analytics();  
+  </script>
 <script src="scripts/same.js"></script>
 <script>
   firebase.auth().onAuthStateChanged(function(user){

@@ -146,10 +146,15 @@ nav {
 #check {
   margin-top:20px;
 }
-
+.modal{
+  width:70% !important; 
+}
+.modal-content {
+  padding:0 !important;
+}
 .contact-us {
   background: #f8f4e5;
-  padding: 50px 100px;
+  padding: 50px 0px;
   border-top: 10px solid #bd9090;
   color:rgb(19, 18, 18);
   font-weight: bold;
@@ -245,7 +250,7 @@ textarea:-webkit-autofill:focus {
 
 /* footer */
 .footer {
-  /* position: relative; */
+  /* position:relative; */
   margin-top: -200px; /* negative value of footer height */
   height: 200px;
   clear:both;
@@ -305,8 +310,55 @@ textarea:-webkit-autofill:focus {
 }
 
 #main-desc {
-  height: 200px;
+  height: 100px;
 }
+.progress {
+  height: 15px !important;
+}
+.post-card {
+  width:94%;
+  height:1000px !important;
+  margin:auto;
+  margin-bottom:50px;
+  padding:30px !important;
+}
+.post-image {
+  width:84%;
+  height: 440px;
+  padding-left:90px;
+}
+@media(max-width:989px){
+  .post-card {
+    width:100%;
+  }
+  .post-image {
+    width:90%;
+    height:400px;
+    padding-left:50px;
+  }
+}
+@media(max-width:600px){
+  .post-card {
+    width:90%;
+    /* padding:20px; */
+  }
+  .post-image {
+    width:100%;
+    height:400px;
+    padding-left:10px;
+  }
+}
+@media(max-width:500px){
+  .poast-card{
+    width:80%;
+    height:1200px !important;
+  }
+  .post-image{
+    width:100%;
+    padding-left:0px;
+  }
+}
+
 
 /* comment */
 .comment {
