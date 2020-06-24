@@ -1,16 +1,16 @@
-// var firebaseConfig = {
-//   apiKey: "AIzaSyA7CcEZ8Cm6BfNDXzSy2GNqw4KRhEKyrGk",
-//   authDomain: "blog-8f917.firebaseapp.com",
-//   databaseURL: "https://blog-8f917.firebaseio.com",
-//   projectId: "blog-8f917",
-//   storageBucket: "blog-8f917.appspot.com",
-//   messagingSenderId: "472701333427",
-//   appId: "1:472701333427:web:ab7be97f749227419965c6",
-//   measurementId: "G-K0927WPTBW"
-// };
-// firebase.initializeApp(firebaseConfig);
-// firebase.auth.Auth.Persistence.LOCAL;
-// firebase.analytics();
+var firebaseConfig = {
+  apiKey: "AIzaSyA7CcEZ8Cm6BfNDXzSy2GNqw4KRhEKyrGk",
+  authDomain: "blog-8f917.firebaseapp.com",
+  databaseURL: "https://blog-8f917.firebaseio.com",
+  projectId: "blog-8f917",
+  storageBucket: "blog-8f917.appspot.com",
+  messagingSenderId: "472701333427",
+  appId: "1:472701333427:web:ab7be97f749227419965c6",
+  measurementId: "G-K0927WPTBW"
+};
+firebase.initializeApp(firebaseConfig);
+firebase.auth.Auth.Persistence.LOCAL;
+firebase.analytics();
 
 
 //reset Password
