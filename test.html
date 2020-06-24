@@ -1,221 +1,331 @@
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link rel = "stylesheet"
-      href = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
-      <link href="assets/img/LOGO.png" rel="shortcut icon" />
-  <link href="/assets/img/LOGO.png" rel="apple-touch-icon-precomposed" />
-  <link rel="stylesheet" href="assets/css/homepage.css">
-  <link rel="stylesheet" href="assets/css/same.css">
-  <!-- <link rel="stylesheet" href="/assets/css/style.css"> -->
-  
-  <!-- Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital@1&display=swap" rel="stylesheet">
-  
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link rel = "stylesheet"
+    href = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
+    <link href="assets/img/LOGO.png" rel="shortcut icon" />
+<link href="assets/img/LOGO.png" rel="apple-touch-icon-precomposed" />
+<link rel="stylesheet" href="assets/css/index.css">
+<link rel="stylesheet" href="assets/css/same.css">
+<!-- <link rel="stylesheet" href="/assets/css/style.css"> -->
+
+<!-- Font -->
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital@1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet">
+
+<!-- bootstrap -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<!-- jQUERY -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>    
+
   <title>Blog</title>
   </head>
   <body class="grey lighten-3">
-      <header id="index-header">
-          <div class="top-center">
-          </div>
-        </header>
+    <!-- <header id="index-header">
+        <div class="top-center">
+        </div>
+      </header> -->
     <!-- NAVBAR -->
-    <nav class="grey lighten-4">
-      <div class="nav-wrapper container">
-        <a href="#" class="brand-logo">
-          <img src="assets/img/LOGO.png" style="width: 120px; margin-top: 10px;">
-        </a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li class="logged-in">
-              <a href="#" class="grey-text modal-trigger hidden" data-target="modal-account">Account</a>
+    <div class="wrapper">
+      <nav class="grey lighten-4">
+        <div class="nav-wrapper container">
+          <a href="#" class="brand-logo">
+            <img src="assets/img/LOGO.png" style="width: 120px;">
+          </a>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li class="logged-in" style="display:none;">
+                <a href="#" class="grey-text" style="font-size: 1.1rem;font-weight: bolder;">文章列表</a>
             </li>
-            <li><a href="#" class="grey-text log_out" style="font-size: 1.1rem;font-weight: bolder;">個人主頁</a></li>
-            <!-- <li><a href="./advice.html" class="grey-text log_out" style="font-size: 1.1rem;font-weight: bolder;">專屬推薦</a></li> 
-            <li><a href="./progress.html" class="grey-text log_out" style="font-size: 1.1rem;font-weight: bolder;">配對進度</a></li> -->
-            <li class="logged-in">
-              <a href="#" class="grey-text log_out" id="logout" style="font-size: 1.1rem;font-weight: bolder;">登出</a>
+            <li class="logged-in" style="display:none;">
+              <a href="#" class="grey-text modal-trigger" data-target="modal-create" style="font-size: 1.1rem;font-weight: bolder;">新增文章</a>
             </li>
-            <li class="logged-in">
-              <a href="#" class="grey-text modal-trigger hidden" data-target="modal-create">Create Guide</a>
+            <li class="logged-in" style="display:none;">
+              <a href="#" class="grey-text modal-trigger" data-target="modal-account" style="font-size: 1.1rem;font-weight: bolder;">我的帳戶</a>
             </li>
-            <li class="logged-out">
-              <a href="#" class="grey-text modal-trigger log_in" data-target="modal-login" style="font-size: 1.1rem;font-weight: bolder;">登入</a>
+            <li class="logged-in" style="display:none;">
+              <a href="#" class="grey-text" id="logout" style="font-size: 1.1rem;font-weight: bolder;">登出</a>
             </li>
-            <li class="logged-out">
-              <a href="#" class="grey-text modal-trigger sign_up" data-target="modal-signup" style="font-size: 1.1rem;font-weight: bolder;">註冊</a>
+            <li class="logged-out" style="display:none;">
+              <a href="#" class="grey-text modal-trigger" data-target="modal-login" style="font-size: 1.1rem;font-weight: bolder;">登入</a>
             </li>
+            <!-- <li class="logged-out" style="display:none;" >
+              <a href="#" class="grey-text modal-trigger" data-target="modal-signup" style="font-size: 1.1rem;font-weight: bolder;">註冊</a>
+            </li> -->
           </span>
         </ul>
-        <div class="menu right">
-            <img src="assets/boot.png" alt="">
-        </div>
-        <div class="hamburger">
-          <div class="close">
-              <div class="close-img"><img src="assets/img/close.png" alt=""></div>
+          <div class="menu right">
+              <img src="assets/boot.png" alt="">
           </div>
-          <p class="logout-rwd log_out" id="logout">登出</p>
-          <p class="login-rwd modal-trigger log_in" data-target="modal-login">登入</p>
-          <p class="signup-rwd modal-trigger sign_up" data-target="modal-signup">註冊</p>
+          <div class="hamburger">
+            <div class="close">
+                <div class="close-img"><img src="assets/img/close.png" alt=""></div>
+            </div>
+            <p class="logout-rwd logged-in" >文章列表</p>
+            <p class="logout-rwd logged-in modal-trigger" data-target="modal-create">新增文章</p>
+            <p class="logout-rwd logged-in modal-trigger" data-target="modal-account">我的帳戶</p>
+            <p class="logout-rwd logged-in" id="logout">登出</p>
+            <p class="login-rwd modal-trigger logged-out" data-target="modal-login">登入</p>
+            <!-- <p class="signup-rwd modal-trigger logged-out" data-target="modal-signup">註冊</p> -->
+          </div>
         </div>
+      </nav>
+      <div class="row" style="margin:0;">
+          <div class="col" style="width:200px;height:50px;"></div>
       </div>
-    </nav>
-    <div class="row" style="margin:0;">
-        <div class="col" style="width:200px;height:50px;"></div>
-    </div>
-    <div class="row log_in">
-          <div class="col s12 m5" >
-              <h4 class="title">Welcome to my Blog~~</h4>
-              <!-- <button id="sign_google">使用google登入</button> -->
-              <div class="image">
-                  <img class="homepage" src="assets/img/homepage.png" alt="svg" >
+      <div class="row logged-out" style="display:none;">
+        <div class="col s12 m5" >
+            <h2 class="title">Welcome to my Blog~~</h2>
+            <div class="image">
+                <img class="homepage" src="assets/img/homepage.png" alt="svg" >
+            </div>
+        </div>
+        <div class = "col s12 m6 card" >
+          <div class = "card-content">
+            <span class = "card-title"></span>                 
+            <h3>註冊 Sign up</h3><br />
+            <form action="#" id="signup-form">
+              <div class="form-group">
+                  <label for="username" style="font-family:Microsoft JhengHei;color:rgba(255, 255, 255, 0.623);font-weight: bold;">使用者名稱NAME<em>&#x2a;</em></label>
+                <input id="username" name="username" required="" type="text" />
               </div>
-          </div>
-          <div class = "register col s12 m6 card" >
-              <div class = "card-content">
-                 <span class = "card-title"></span>
-                 <!-- <p>FineTutor是一個家教網站，致力於幫助家長與老師快速找到適合的對象。</p> -->
-                 <!-- <p style="font-size:20px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nulla similique, numquam in eos nam velit odit rem aliquam, dolorem, sint magni maxime ducimus dolorum iste placeat! Libero officia autem praesentium!</p> -->
-                 
-                <h4>註冊 Sign up</h4><br />
-                <form action="#" id="signup-form">
-                  <!-- <label for="customerName">您的姓名NAME<em>&#x2a;</em></label> -->
-                  <!-- <input id="customerName" name="customerName" required="" type="text" /> -->
-                  <label for="signup-email" >郵件EMAIL<em>&#x2a;</em></label>
-                  <input id="signup-email" name="signup-email" required="" type="email" />
-                  <h3>
-                    郵件即為登入帳號
-                  </h3>
-                  <label for="customerPassword">密碼PASSWORD<em>&#x2a;</em></label>
-                  <input id="signup-password" name="customerPassword" required="" type="password"  />
-                  <!-- <label for="customerIdentity">註冊身分IDENTITY<em>&#x2a;</em></label>
-                  <input id="customerIdentity" name="customerIdentity" required="" type="text" placeholder="老師/學生" /> -->
-                  <!-- <button id="customerOrder" onclick="window.location='/teacher/teacher.html';">確定</button> -->
-                  <button class="btn" id="customerOrder">確定</button>
-                </form>
-                
+  
+              <div class="form-group">
+                <label for="signup-email" style="color:rgba(255, 255, 255, 0.623);font-weight: bold;">郵件EMAIL<em>&#x2a;</em></label>
+              <input id="signup-email" name="signup-email" required="" type="email" />
+              <small id="emailHelp" class="form-text"style="color:rgba(255, 255, 255, 0.5);">We'll never share your email with anyone else.</small>
+              </div>
+  
+              <div class="form-group">
+                <label for="signup-password" style="color:rgba(255, 255, 255, 0.623);font-weight: bold;">密碼PASSWORD<em>&#x2a;</em></label>
+              <input id="signup-password" name="signup-password" required="" type="password"  />
               </div>
               
-              <div class="col s12 m1"></div>
-           </div>
-    </div>
-
-  <!-- SIGN UP MODAL -->
-  <div id="modal-signup" class="modal">
-    <div class="modal-content">
-      <div class="contact-us">
-        <h4>註冊 Sign up</h4><br />
-        <form action="#" id="signup-form">
-          <!-- <label for="customerName">您的姓名NAME<em>&#x2a;</em></label> -->
-          <!-- <input id="customerName" name="customerName" required="" type="text" /> -->
-          <label for="signup-email" >郵件EMAIL<em>&#x2a;</em></label>
-          <input id="signup-email" name="signup-email" required="" type="email" />
-          <h3>
-            郵件即為登入帳號
-          </h3>
-          <label for="password">密碼PASSWORD<em>&#x2a;</em></label>
-          <input id="signup-password" name="password" required="" type="password"  />
-          <!-- <label for="customerIdentity">註冊身分IDENTITY<em>&#x2a;</em></label> -->
-          <!-- <input id="customerIdentity" name="customerIdentity" required="" type="text" placeholder="老師/學生" /> -->
-          <!-- <label for="customerPhone">電話PHONE</label><input id="customerPhone" name="customerPhone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" type="tel" />
-          <label for="orderNumber">ORDER NUMBER</label><input id="orderNumber" name="orderNumber" type="text" /> -->
-          <!-- <label for="customerNote">YOUR MESSAGE <em>&#x2a;</em></label><textarea id="customerNote" name="customerNote" required="" rows="4"></textarea>
+              <a href="ForgetPassword.html" style="color:#1E2D61;font-weight: bold;text-decoration: underline;">忘記密碼??</a>
+  
+              <button class="btn btn-primary" style="background:#1E2D61;margin-top:20px;">確定</button>
+              <p class="error center-align" ></p>
+            </form>
+          </div>
+        </div>
+        <div class="col s12 m1"></div>
+      </div>
+      <div class="logged-out">
+        <div style="height: 300px;"></div>
+      </div>
+  
+    <!-- SIGN UP MODAL -->
+    <!-- <div id="modal-signup" class="modal">
+      <div class="modal-content">
+        <div class="contact-us"> 
+          <span class = "card-title"></span>                 
+          <h4>註冊 Sign up</h4><br />
+          <form action="#" id="signup-form">
+            <label for="username" style="font-family:Microsoft JhengHei;">使用者名稱NAME<em>&#x2a;</em></label>
+            <input id="username" name="username" required="" type="text" />
+  
+            <label for="signup-email" >郵件EMAIL<em>&#x2a;</em></label>
+            <input id="signup-email" name="signup-email" required="" type="email" />
+  
+            <label for="signup-password">密碼PASSWORD<em>&#x2a;</em></label>
+            <input id="signup-password" name="signup-password" required="" type="password"  />
+            
+            <button class="btn btn-primary" type="button" id="check" style="background:#1E2D61;">確定</button>
+            <p class="error center-align" ></p>
+          </form>
+        </div>
+      </div>
+    </div> -->
+  
+    <!-- LOGIN MODAL -->
+    <div id="modal-login" class="modal">
+      <div class="modal-content">
+        <div class="contact-us">
+          <h3>登入 Login in</h3><br />
+          <form action="#" id="login-form">
           
-          <label for="spamProtection">SPAM PROTECTION <em>&#x2a; </em><span>&nbsp;&nbsp;&nbsp;&nbsp;What day comes before July 11th?</span></label><input id="spamProtection" name="spamProtection" type="text" /> -->
-          <!-- <button id="customerOrder" onclick="window.location='/teacher/teacher.html';">確定</button> -->
-          <button class="btn" id="customerOrder">確定</button>
-        </form>
-      </div>
-      
-    </div>
-  </div>
-
-  <!-- LOGIN MODAL -->
-  <div id="modal-login" class="modal">
-    <div class="modal-content">
-      <div class="contact-us">
-        <h4>登入 Login in</h4><br />
-        <form action="#" id="login-form">
-          <label for="login-email">郵件EMAIL<em>&#x2a;</em></label>
-          <input id="login-email" name="login-email" required="" type="email" />
-          <label for="login-password">密碼PASSWORD<em>&#x2a;</em></label>
-          <input id="login-password" name="login-password" required="" type="password"  />
-          <!-- <button id="customerOrder" onclick="window.location='/teacher/teacher.html';">確定</button> -->
-          <button class="btn" id="customerOrder" onclick="window.location='index.html';">確定</button>
-        </form>
-      </div>
-      
-    </div>
-  </div>
-
-  <!-- ACCOUNT MODAL -->
-  <div id="modal-account" class="modal">
-    <div class="modal-content center-align">
-      <h4>Account details</h4><br />
-      <div class="account-details"></div>
-      <div class="account-extras"></div>
-    </div>
-  </div>
-
-  <!-- CREATE GUIDE MODAL -->
-  <div id="content"></div>
-  <!-- <div id="modal-create" class="modal">
-    <div class="modal-content">
-      <h4>Create Guide</h4><br />
-      <form id="create-form">
-        <div class="input-field">
-          <input type="text" id="title" required>
-          <label for="title">Guide Title</label>
-        </div>
-        <div class="input-field">
-          <textarea id="content" class="materialize-textarea" required></textarea>
-          <label for="content">Guide Content</label>
-        </div>
-        <button class="btn yellow darken-2 z-depth-0">Create</button>
-      </form>
-    </div>
-  </div> -->
-
-  <!-- GUIDE LIST -->
-  <div class="container" style="margin-top: 40px;">
-    <div id="content"></div>
-  </div>
-  <footer class = "page-footer" style = "background-color: rgb(42, 55, 80);">
-    <div class = "row">
-        <div class = "col s12 m6 l6">
-          <h5 class = "white-text">Vivian's Blog</h5>
+            <div class="form-group">
+              <label for="login-email">郵件地址</label>
+              <input type="email" class="form-control" id="login-email" aria-describedby="emailHelp" placeholder="Enter email">
+              
+            </div>
+            <div class="form-group">
+              <label for="login-password">密碼</label>
+              <input type="password" class="form-control" id="login-password" placeholder="Password">
+            </div>
+          
+              <!-- <label for="login-email" style="font-family:Microsoft JhengHei;">郵件EMAIL<em>&#x2a;</em></label>
+            <input id="login-email" name="login-email" required="" type="email" />
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            
+          
+          
+            
+              <label for="login-password" style="font-family:Microsoft JhengHei;">密碼PASSWORD<em>&#x2a;</em></label>
+            <input id="login-password" name="login-password" required="" type="password"  /> -->
+            
+          
+            <button class="btn btn-primary" id="btn-login" style="background:#1E2D61;margin-top:20px;">確定</button>
+  
+            <p class="error center-align" ></p>
+          </form>
         </div>
         
-        <div class = "col">
-          <ul>
-              <li><a href = "#" class = "grey-text text-lighten-4 right">
-                常見問題</a></li>
-              <li><a href = "#" class = "grey-text text-lighten-4 right">
-                關於我</a></li>
-          </ul>
+      </div>
+    </div>
+  
+    <!-- ACCOUNT MODAL -->
+    <div id="modal-account" class="modal">
+      <div class="modal-content center-align">
+        <h2>我的帳戶</h2><br />
+        <div class="account-details"></div>
+        <div class="account-extras"></div>
+      </div>
+    </div>
+  
+    <!-- CREATE GUIDE MODAL -->
+    <!-- <div id="modal-create" class="modal" style="overflow: scroll;">
+      <div class="modal-content">
+        <div class="contact-us">
+          
+          <h4>新增文章Create Post</h4><br />
+          <form action="#" id="create-post">
+            <div class="form-group">
+              <input type="file" class="form-control-file" id="main-image">
+              <div class="invalid-feedback">
+                請選擇一張背景照片
+              </div>
+            </div>
+            <div class="form-group">
+              <img id="selected-image" width="250" height="150" src="#" alt="背景圖片">
+            </div>
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" style="width: 2%;" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" id="upload-progress">0%</div>
+            </div>
+            <div class="form-group">
+              <label for="title" style="font-family:Microsoft JhengHei;">文章標題TITLE<em>&#x2a;</em></label>
+              <input id="title" name="title" required="" type="text" />
+            </div>
+            
+            <div class="form-group">
+              <label for="content" style="font-family:Microsoft JhengHei;">文章內容CONTENT<em>&#x2a;</em></label>
+              <textarea id="content" name="content" required="" rows="4"></textarea>
+            </div>
+            <div class="form-group">
+              <button class="btn btn-primary" style="background:#1E2D61;margin-top:20px;">確定</button>
+            </div>
+            
+          </form>
         </div>
+      </div>
+    </div> -->
+  
+    <!-- GUIDE LIST -->
+    <div class="container logged-in" style="margin-top: 40px;">
+      <!-- <ul class="collapsible post">
+  
+      </ul> -->
+      <h2 style="text-align: center;margin-bottom: 80px;font-weight:bold;">文章列表</h2 style="text-align: center;">
+
+      <div id="result">
+
+      </div>
+      
+      <!-- <div class="post"></div>
+      <div class="comment" id="create-comment">
+      </div> -->
+      
+    </div>
+
+    <div id="modal-create" class="modal" style="overflow: scroll;">
+      <div class="modal-content">
+        <div class="contact-us">
+          <!-------------- POST AREA ------------------>
+          <script>
+            var counter = 0;
+          </script>
+          <h4>新增文章Create Post</h4><br />
+          <form action="#" id="create-post">
+            
+            <div class="form-group">
+              <label for="title" style="font-family:Microsoft JhengHei;">文章標題TITLE<em>&#x2a;</em></label>
+              <input id="title" name="title" required="" type="text" />
+            </div>
+            
+            <div class="form-group">
+              <label for="content" style="font-family:Microsoft JhengHei;">文章內容CONTENT<em>&#x2a;</em></label>
+              <textarea id="main-desc" name="content" required="" rows="5"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="image" style="font-family:Microsoft JhengHei;">背景照片IMAGE<em>&#x2a;</em></label>
+              <input type="file" class="form-control-file" id="main-image">
+              <div class="invalid-feedback">
+                請選擇一張背景照片
+              </div>
+            </div>
+            <div class="form-group">
+              <img id="selected-image" width="300px" height="250px" src="#" alt="背景圖片">
+            </div>
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" style="width: 2%;" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" id="upload-progress">0%</div>
+              <!-- <div class="progress bg-secondary bg-success" id="upload-progress" style="width:1%;">0%</div> -->
+            </div>
+            <div class="form-group">
+              <button class="btn btn-primary" id="save-post" style="background:#1E2D61;margin-top:20px;">確定</button>
+            </div>
+          </form>
+        </div>
+        
+      </div>
     </div>
     
-    <div class = "footer-copyright">
-        <div class = "container">
-          © 2020 
-          <a class = "grey-text text-lighten-4 right" href = "#!">Links</a>
-        </div>
-    </div>         
+  
+    <footer class = "footer" style = "background-color: rgb(42, 55, 80);">
+      <div class="container" style="padding-top: 30px;">
+        <div class = "row">
+          <div class="col-md-2"></div>
+            <div class = "col-sm-12 col-md-10">
+              <h5 class = "white-text">Vivian's Blog</h5>
+            </div>
+          </div>    
+          <div class="row">
+            <div class="col-sm-4 col-md-2"></div>
+            <div class = "col-sm-4 col-sm-12 col-md-10">
+              <ul>
+                  <li><a href = "#" class = "grey-text text-lighten-4 align-center">
+                    關於我</a></li>
+              </ul>
+            </div>
+            <div class="col-sm-4"></div>
+          </div>
+        
+        
+        <div class="row">
+          <div class="col-sm-4 col-md-2"></div>
+          <div class="col-sm-4 col-md-10 grey-text text-lighten-4">
+            © 2020 
+          </div>
+          <div class="col-sm-4"></div>
+        </div>     
+      </div>  
     </footer>
+  </div>
 
 
 
 
-    <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-firestore.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-analytics.js"></script>
-    <!-- Initialize Firebase -->
-    <!-- <script src="/__/firebase/init.js"></script> -->
+  <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-analytics.js"></script>
+   <!-- database -->
+   <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-database.js"></script>
+  <!-- storage -->
+  <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-storage.js"></script>  
+
   <script>
     var firebaseConfig = {
     apiKey: "AIzaSyA7CcEZ8Cm6BfNDXzSy2GNqw4KRhEKyrGk",
@@ -229,29 +339,33 @@
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
+  firebase.auth.Auth.Persistence.LOCAL;
   firebase.analytics();
   
-    //make auth and firestor references
-    const auth = firebase.auth();
-    const db = firebase.firestore();
-  
+  //make auth and firestor references
+  const auth = firebase.auth();
+  const db = firebase.firestore();
+  const storage = firebase.storage();
+
     // update firebase settings
     // db.settings({timestampsInSnaposhots : true});
   </script>
   <!-- Compiled and minified JavaScript -->
   
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>        
-    <script src = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
-    <script src="scripts/homepage.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-
-    <script src="http://fb.me/react-0.8.0.js"></script>
-    <script src="http://fb.me/JSXTransformer-0.8.0.js"></script>
-    <script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
     
-    <script src="scripts/auth.js"></script>
-    <script src="scripts/index.js"></script>
-    <script src="scripts/test.js"></script>
-    
+        
+  <script src = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+  <script src="http://fb.me/react-0.8.0.js"></script>
+  <script src="http://fb.me/JSXTransformer-0.8.0.js"></script>
+  <script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+  
+  <!-- bootstrap -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+  
+  <script src="scripts/auth.js"></script>
+  <script src="scripts/index.js"></script>
+  <script src="scripts/same.js"></script>
 </body>

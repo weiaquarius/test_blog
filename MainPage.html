@@ -1,0 +1,430 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link rel = "stylesheet"
+    href = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
+    <link href="assets/img/LOGO.png" rel="shortcut icon" />
+<link href="assets/img/LOGO.png" rel="apple-touch-icon-precomposed" />
+<link rel="stylesheet" href="assets/css/index.css">
+<link rel="stylesheet" href="assets/css/same.css">
+<!-- <link rel="stylesheet" href="/assets/css/style.css"> -->
+
+<!-- Font -->
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital@1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet">
+
+
+<!-- jQUERY -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>    
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+
+<!-- bootstrap -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+<!-- firebase -->
+<script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-analytics.js"></script>
+<!-- database -->
+<script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-database.js"></script>  
+<!-- storage -->
+<script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-storage.js"></script>  
+  <!-- Compiled and minified JavaScript -->
+  
+    
+          
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+  <script src="http://fb.me/react-0.8.0.js"></script>
+  <script src="http://fb.me/JSXTransformer-0.8.0.js"></script>
+  <script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+    
+ 
+  <title>Blog</title>
+  </head>
+  <body class="grey lighten-3">
+    <!-- <header id="index-header">
+        <div class="top-center">
+        </div>
+      </header> -->
+    <!-- NAVBAR -->
+    <div class="wrapper">
+      <nav class="grey lighten-4">
+        <div class="nav-wrapper container">
+          <a href="#" class="brand-logo">
+            <img src="assets/img/LOGO.png" style="width: 120px;cursor:default;">
+          </a>
+    
+          <div class="dropdown navbar-right">
+            <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"  style="margin-top:20px;background-color: #35488b;color:white">
+              個人設定
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="#" id="">新增文章</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#" id=''>我的帳戶</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#" id="btn-logout">登出</a>
+            </div>
+          </div>
+          <!-- <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li class="logged-in" style="display:none;">
+                <a href="#" class="grey-text" style="font-size: 1.1rem;font-weight: bolder;">文章列表</a>
+            </li>
+            <li class="logged-in" style="display:none;">
+              <a href="#" class="grey-text modal-trigger" data-target="modal-create" style="font-size: 1.1rem;font-weight: bolder;">新增文章</a>
+            </li>
+            <li class="logged-in" style="display:none;">
+              <a href="#" class="grey-text modal-trigger" data-target="modal-account" style="font-size: 1.1rem;font-weight: bolder;">我的帳戶</a>
+            </li>
+            <li class="logged-in" style="display:none;">
+              <a href="#" class="grey-text" id="logout" style="font-size: 1.1rem;font-weight: bolder;">登出</a>
+            </li>
+            <li class="logged-out" style="display:none;">
+              <a href="#" class="grey-text modal-trigger" data-target="modal-login" style="font-size: 1.1rem;font-weight: bolder;">登入</a>
+            </li>
+            
+          </span>
+        </ul> -->
+          <div class="menu right">
+              <img src="assets/boot.png" alt="">
+          </div>
+          <div class="hamburger">
+            <div class="close">
+                <div class="close-img"><img src="assets/img/close.png" alt=""></div>
+            </div>
+            <p class="logout-rwd logged-in" >文章列表</p>
+            <p class="logout-rwd logged-in modal-trigger" data-target="modal-create">新增文章</p>
+            <p class="logout-rwd logged-in modal-trigger" data-target="modal-account">我的帳戶</p>
+            <p class="logout-rwd logged-in" id="logout">登出</p>
+            <p class="login-rwd modal-trigger logged-out" data-target="modal-login">登入</p>
+            <!-- <p class="signup-rwd modal-trigger logged-out" data-target="modal-signup">註冊</p> -->
+          </div>
+        </div>
+      </nav>
+      
+      <div class="logged-out">
+        <div style="height: 300px;"></div>
+      </div>
+  
+    <!-- SIGN UP MODAL -->
+    <!-- <div id="modal-signup" class="modal">
+      <div class="modal-content">
+        <div class="contact-us"> 
+          <span class = "card-title"></span>                 
+          <h4>註冊 Sign up</h4><br />
+          <form action="#" id="signup-form">
+            <label for="username" style="font-family:Microsoft JhengHei;">使用者名稱NAME<em>&#x2a;</em></label>
+            <input id="username" name="username" required="" type="text" />
+  
+            <label for="signup-email" >郵件EMAIL<em>&#x2a;</em></label>
+            <input id="signup-email" name="signup-email" required="" type="email" />
+  
+            <label for="signup-password">密碼PASSWORD<em>&#x2a;</em></label>
+            <input id="signup-password" name="signup-password" required="" type="password"  />
+            
+            <button class="btn btn-primary" type="button" id="check" style="background:#1E2D61;">確定</button>
+            <p class="error center-align" ></p>
+          </form>
+        </div>
+      </div>
+    </div> -->
+  
+    
+    <!-- ACCOUNT MODAL -->
+    <div id="modal-account" class="modal">
+      <div class="modal-content center-align">
+        <h2>我的帳戶</h2><br />
+        <div class="account-details"></div>
+        <div class="account-extras"></div>
+      </div>
+    </div>
+  
+    <!-- CREATE GUIDE MODAL -->
+    <!-- <div id="modal-create" class="modal" style="overflow: scroll;">
+      <div class="modal-content">
+        <div class="contact-us">
+          
+          <h4>新增文章Create Post</h4><br />
+          <form action="#" id="create-post">
+            <div class="form-group">
+              <input type="file" class="form-control-file" id="main-image">
+              <div class="invalid-feedback">
+                請選擇一張背景照片
+              </div>
+            </div>
+            <div class="form-group">
+              <img id="selected-image" width="250" height="150" src="#" alt="背景圖片">
+            </div>
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" style="width: 2%;" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" id="upload-progress">0%</div>
+            </div>
+            <div class="form-group">
+              <label for="title" style="font-family:Microsoft JhengHei;">文章標題TITLE<em>&#x2a;</em></label>
+              <input id="title" name="title" required="" type="text" />
+            </div>
+            
+            <div class="form-group">
+              <label for="content" style="font-family:Microsoft JhengHei;">文章內容CONTENT<em>&#x2a;</em></label>
+              <textarea id="content" name="content" required="" rows="4"></textarea>
+            </div>
+            <div class="form-group">
+              <button class="btn btn-primary" style="background:#1E2D61;margin-top:20px;">確定</button>
+            </div>
+            
+          </form>
+        </div>
+      </div>
+    </div> -->
+  
+    
+
+    <!-- <div id="modal-create" class="modal" style="overflow: scroll;">
+      <div class="modal-content"> -->
+        <div class="contact-us">
+          <!-------------- POST AREA ------------------>
+          <script>
+            var counter = 0;
+          </script>
+          <h4>新增文章Create Post</h4><br />
+          <form action="#" id="create-post">
+            
+            <div class="form-group">
+              <label for="title" style="font-family:Microsoft JhengHei;">文章標題TITLE<em>&#x2a;</em></label>
+              <input id="title" name="title" required="" type="text" />
+            </div>
+            
+            <div class="form-group">
+              <label for="content" style="font-family:Microsoft JhengHei;">文章內容CONTENT<em>&#x2a;</em></label>
+              <textarea id="main-desc" name="content" required="" rows="5"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="image" style="font-family:Microsoft JhengHei;">背景照片IMAGE<em>&#x2a;</em></label>
+              <input type="file" class="form-control-file" id="main-image">
+              <div class="invalid-feedback">
+                請選擇一張背景照片
+              </div>
+            </div>
+            <div class="form-group">
+              <img id="selected-image" width="350px" height="250px" src="#" alt="背景圖片">
+            </div>
+            <div class="form-group">
+              <div class="progress bg-secondary ">
+                <div class="progress-bar bg-success" id="upload-progress" style="width:0%;">0%</div>
+                </div>
+            </div>
+            <div id="result">
+
+            </div>
+            <div class="form-group" style="margin-top:30px;">
+              <button class="btn btn-primary" type="button" id="save-post" style="background:#1E2D61;margin-top:10px;">確定</button>
+            </div>
+          </form>
+          
+        </div>
+
+        <!-- After blog post area start-->
+        <br><br><br>
+        <hr>
+        <br><br><br>
+        <h2 style="text-align: center;margin-bottom: 80px;font-weight:bold;">文章列表</h2 style="text-align: center;">
+        
+        <div class="row container">
+          <div class="col-sm-12" id="blog">
+
+          </div>
+        </div>
+        <br>
+        <!-- After blog post area end-->
+
+        <script>
+          var validImagetypes = ["image/gif", "image/jpeg", "image/png"];
+
+          $("#selected-image").hide();
+
+          function previewImage(image_post){
+            if (image_post.files && image_post.files[0]){
+              var reader = new FileReader();
+              reader.onload = function(e){
+                $("#selected-image").attr('src',e.target.result);
+                $("#selected-image").fadeIn();
+              }
+              reader.readAsDataURL(image_post.files[0]);
+              // $("#selected-image").show();
+            }
+          }
+
+          $("#main-image").change(function(){
+            previewImage(this);
+          });
+
+          $("#save-post").click(function(){
+            
+            // $("#main-desc").removeClass("is-invalid");
+            $("#main-image").removeClass("is-invalid");
+            
+            var title = $("#title").val();
+            var desc = $("#main-desc").val();
+            var picture = $("#main-image").prop("files")[0];
+            
+            if (picture == null){
+              $("#main-image").addClass("is-invalid");
+              return;
+            }
+            if($.inArray(picture["type"], validImagetypes)<0){
+              $("#main-image").addClass("is-invalid");
+              return;
+            }
+
+            // Upload and save to firebase
+            var databaseRef = firebase.database().ref().child("blog");
+            databaseRef.once("value").then(function(snapshot){
+              var name = picture['name'];
+              var dataStr = new Date().getTime();
+              var fileCompleteName = name + "_" + dataStr;
+              
+              var storageRef = firebase.storage().ref("post images");
+              var poststorageRef = storageRef.child(fileCompleteName);
+
+              var uploadTask = poststorageRef.put(picture);
+
+              uploadTask.on("state_changed",
+                
+                  function progress(snapshot){
+                    var percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    $("#upload-progress").html(Math.round(percentage) + "%");
+                    $("#upload-progress").attr("style", "width:" + percentage + "%");
+                  },
+                  function error(err){
+                    
+                  },
+                  function complete(){
+                    var user = firebase.auth().currentUser;
+                    console.log("!!");
+                    var userName;
+                    firebase.database().ref('Users/' + user.uid).once('value').then(function(snapshot){
+                      var fName = (snapshot.val() && snapshot.val().username);
+                      userName = fName;
+                      console.log(userName);
+                    });
+                    uploadTask.snapshot.ref.getDownloadURL().then(function(downloadUrl){
+                      var time = new Date();
+
+                      var options = {
+                        year:"numeric",
+                        month:"long",
+                        day:"2-digit",
+                        weekday:"long",
+                      };
+
+                      var postData = {
+                        "image" : downloadUrl,
+                        "name" : fileCompleteName,
+                        "desc" : desc,
+                        "title" :title,
+                        "uid" :user.uid,
+                        "name" : userName,
+                        "time": time.toLocaleDateString('Taiwan',{hour:"numeric",minute:"numeric", hour12:true}),
+                        "date" : time.toLocaleDateString('Taiwan',options),
+                      };
+                      console.log(options,postData);
+                      var newPostRef = databaseRef.push();
+
+                      newPostRef.set(postData, function(err){
+                        if (err){
+                          console.log("失敗");
+                          $("#result").attr("class", "alert alert-danger");
+                          $("#result").html(err.message);
+                        }
+                        else {
+                          console.log("成功");
+                          $("#result").attr("class", "alert alert-success");
+                          $("#result").html("成功上傳貼文!");
+
+                          window.open("","_self");
+                        }
+                      });
+                    });
+                  }
+              );
+          });
+          
+        });
+
+        function resetForm(){
+          
+          $("#create-post")[0].reset();
+          $("#selected-image").fadeOut();
+          $("#upload-progress").html("completed");
+        };
+        </script>
+      <!-- </div>
+    </div> -->
+    
+    <!-- GUIDE LIST -->
+    <div class="container logged-in" style="margin-top: 40px;">
+      <!-- <ul class="collapsible post">
+  
+      </ul> -->
+      <!-- <h2 style="text-align: center;margin-bottom: 80px;font-weight:bold;">文章列表</h2 style="text-align: center;"> -->
+
+      
+      
+      <div class="post"></div>
+      <div class="comment" id="create-comment">
+      </div>
+      
+    </div>
+  
+    <footer class = "footer" style = "background-color: rgb(42, 55, 80);">
+      <div class="container" style="padding-top: 30px;">
+        <div class = "row">
+          <div class="col-md-2"></div>
+            <div class = "col-sm-12 col-md-10">
+              <h5 class = "white-text">Vivian's Blog</h5>
+            </div>
+          </div>    
+          <div class="row">
+            <div class="col-sm-4 col-md-2"></div>
+            <div class = "col-sm-4 col-sm-12 col-md-10">
+              <ul>
+                  <li><a href = "#" class = "grey-text text-lighten-4 align-center">
+                    關於我</a></li>
+              </ul>
+            </div>
+            <div class="col-sm-4"></div>
+          </div>
+        
+        
+        <div class="row">
+          <div class="col-sm-4 col-md-2"></div>
+          <div class="col-sm-4 col-md-10 grey-text text-lighten-4">
+            © 2020 
+          </div>
+          <div class="col-sm-4"></div>
+        </div>     
+      </div>  
+    </footer>
+  </div>
+
+  <script src="scripts/same.js"></script>
+  <script>
+    firebase.auth().onAuthStateChanged(function(user){
+      if (!user){
+        window.location.href = "index.html";
+      }
+    })
+  
+  </script>
+
+<!-- <script src="scripts/auth.js"></script>
+<script src="scripts/index.js"></script> -->
+
+  
+</body>

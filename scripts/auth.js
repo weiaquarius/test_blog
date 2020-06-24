@@ -1,7 +1,9 @@
 //listen for auth status change
 auth.onAuthStateChanged(user => {
-  console.log(user);
+
   if (user){
+    
+    // console.log(name.value);
     db.collection('post').onSnapshot(snapshot => {
       // console.log(snapshot.docs)
       setuppost(snapshot.docs);
@@ -22,63 +24,41 @@ auth.onAuthStateChanged(user => {
     setupUI();
     console.log('user logged out');
   }
-  console.log(user.email);
-});
-
-//create new post
-const createPost = document.querySelector('#create-post');
-createPost.addEventListener('submit', (e) => {
-  
-  e.preventDefault();
-  let Today = new Date();
-  let data = Today.getFullYear()+ ' 年 ' + (Today.getMonth()+1) + ' 月 ' + Today.getDate() + '日';
-  db.collection('post').add({
-    // title: createPost.title.value;
-    title: createPost['title'].value, //title is a "id" type
-    date: data,
-    content: createPost['content'].value,
-  }).then(() => {
-      const modal = document.querySelector('#modal-create');
-      M.Modal.getInstance(modal).close();
-      createPost.reset();
-  }).catch(err => {
-    console.log(err.message);
-  })
 });
 
 //create new comment
-const createComment = document.querySelector('#create-comment');
-createComment.addEventListener('submit', (e) => {
-  console.log('aa');
-  e.preventDefault();
-  let Today = new Date();
-  let data =  Today.getMonth()+1 + ' 月 '+ Today.getDate()+ ' 日 ' +  Today.getHours() + '時'+Today.getMinutes() + '分';
-  
-  db.collection('comment').add({
-    // title: createPost.title.value;
-    date: data,
-    content: createComment['content'].value,
-  }).then(() => {
-    const modal = document.querySelector('#create-comment');
-    M.Modal.getInstance(modal).close();
-    // createComment.reset();
-  }).catch(err => {
-    console.log(err.message);
-})
-});
+// const createComment = document.querySelector('#create-comment');
+// createComment.addEventListener('submit', (e) => {
+//   e.preventDefault();
+//       let Today = new Date();
+//       let data =  Today.getMonth()+1 + ' 月 '+ Today.getDate()+ ' 日 ' +  Today.getHours() + '時'+Today.getMinutes() + '分';
+      
+//       db.collection('comment').add({
+//         // title: createPost.title.value;
+//         date: data,
+//         content: createComment['content'].value,
+//         }).then(() => {
+//           const modal = document.querySelector('#create-comment');
+//           M.Modal.getInstance(modal).close();
+//           // createComment.reset();
+//         }).catch(err => {
+//           console.log(err.message);
+//   });
+// });
 
 
 
 // signup
-const signupForm = document.querySelector('#signup-form');
+
+const signupForm = document.querySelector("#signup-form");
+
 signupForm.addEventListener('submit', (e) => {
   e.preventDefault();
-  
   // get user info
   const email = signupForm['signup-email'].value;
   const password = signupForm['signup-password'].value;
-  // console.log(email,password);
-  // sign up the user
+
+  //sign up the user
   auth.createUserWithEmailAndPassword(email, password).then(cred => {
     return db.collection('user').doc(cred.user.uid).set({
       username: signupForm['username'].value
@@ -88,21 +68,29 @@ signupForm.addEventListener('submit', (e) => {
     const modal = document.querySelector('#modal-signup');
     M.Modal.getInstance(modal).close();
     signupForm.reset();
+    signupForm.querySelector('.error').innerHTML = '';
+  }).catch(err => {
+    signupForm.querySelector('.error').innerHTML = '/'+ err.message +'/';
+    console.log(err.message);
   });
 });
 
 // logout
-const logout = document.querySelector('#logout');
-logout.addEventListener('click', (e) => {
-  e.preventDefault();
-  auth.signOut();
-});
+const logout = document.querySelectorAll("#logout");
+console.log(logout.length);
+for (let i = 0; i < logout.length; i++) {
+    logout[i].addEventListener("click", (e) => {
+      e.preventDefault();
+      auth.signOut();
+    });
+}
+
 
 // login
 const loginForm = document.querySelector('#login-form');
-loginForm.addEventListener('submit', (e) => {
+  loginForm.addEventListener('submit', (e) => {
   e.preventDefault();
-  
+  console.log("Aa");
   // get user info
   const email = loginForm['login-email'].value;
   const password = loginForm['login-password'].value;
@@ -114,9 +102,38 @@ loginForm.addEventListener('submit', (e) => {
     M.Modal.getInstance(modal).close();
     loginForm.reset();
   });
-
 });
 
+//create new post
+// const createPost = document.querySelector('#create-post');
+// createPost.addEventListener('submit', (e) => {
+  
+//   e.preventDefault();
+//   let Today = new Date();
+//   let data = Today.getFullYear()+ ' 年 ' + (Today.getMonth()+1) + ' 月 ' + Today.getDate() + ' 日 '+ Today.getHours() + ' 時 ' + Today.getMinutes() + ' 分 ';
+//   auth.onAuthStateChanged(user => {
+//     db.collection('user').doc(user.uid).get().then(doc => {
+//       if (user){
+//         const name = doc.data().username;
+//         // console.log(user.email);
+//         db.collection('post').add({
+//           // title: createPost.title.value;
+//           title: createPost['title'].value, //title is a "id" type
+//           date: data,
+//           author:name,
+//           content: createPost['content'].value,
+//         }).then(() => {
+//             const modal = document.querySelector('#modal-create');
+//             M.Modal.getInstance(modal).close();
+//             createPost.reset();
+//         }).catch(err => {
+//           console.log(err.message);
+//         })
+//       }
+//     });
+//   });
+  
+// });
 
 // google
 // var provider = new firebase.auth.GoogleAuthProvider();

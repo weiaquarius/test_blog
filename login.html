@@ -1,0 +1,193 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link rel = "stylesheet"
+    href = "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
+    <link href="assets/img/LOGO.png" rel="shortcut icon" />
+  <link href="assets/img/LOGO.png" rel="apple-touch-icon-precomposed" />
+  <link rel="stylesheet" href="assets/css/index.css">
+  <link rel="stylesheet" href="assets/css/same.css">
+<!-- <link rel="stylesheet" href="/assets/css/style.css"> -->
+
+<!-- Font -->
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital@1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet">
+
+<!-- jQUERY -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> 
+  
+<!-- bootstrap -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+<!-- firebase -->
+<script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-analytics.js"></script>
+<!-- database -->
+<script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-database.js"></script>
+<!-- storage -->
+<script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-storage.js"></script>  
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+<script src="http://fb.me/react-0.8.0.js"></script>
+<script src="http://fb.me/JSXTransformer-0.8.0.js"></script>
+<script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+  
+
+  <title>Login</title>
+  </head>
+  <body class="grey lighten-3">
+    
+    <!-- NAVBAR -->
+    <div class="wrapper">
+      <nav class="grey lighten-4">
+        <div class="nav-wrapper container">
+          <a href="index.html" class="brand-logo">
+            <img src="assets/img/LOGO.png" style="width: 120px;">
+          </a>
+        </div>
+      </nav>
+      <div class="row" style="margin:0;">
+          <div class="col" style="width:200px;height:50px;"></div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3"></div>
+          <div class = "col-sm-12 col-md-6 card" >
+            <div class = "card-content">
+              <span class = "card-title"></span>                 
+              <h3>登入 Login in</h3><br />
+              <form action="#" id="signup-form">
+      
+                  <div class="form-group">
+                  <label for="login-email" style="font-family:Microsoft JhengHei;color:rgba(255, 255, 255, 0.623);font-weight: bold;">郵件EMAIL<em>&#x2a;</em></label>
+                  <input id="login-email" name="login-email" required="" type="email" />
+                  </div>
+      
+                  <div class="form-group">
+                  <label for="login-password" style="font-family:Microsoft JhengHei;color:rgba(255, 255, 255, 0.623);font-weight: bold;">密碼PASSWORD<em>&#x2a;</em></label>
+                  <input id="login-password" name="login-password" required="" type="password"  />
+                  </div>
+                  
+                  <a href="ForgetPassword.html" style="color:#1E2D61;font-weight: bold;text-decoration: underline;">忘記密碼??</a>
+                  <br>
+                  
+                  <button class="btn btn-primary" type="button" id="btn-login" style="background:#1E2D61;margin-top:10px;">確定</button>
+                  <button class="btn btn-primary" type="button" style="background:#4b526b;margin-top:10px;margin-right:20px;" onclick="location.href='index.html'">返回註冊</button>
+                  <p class="error center-align" ></p>
+                  <br><br><br>
+              </form>
+            </div>
+            <div class="col-md-3"></div>
+          </div>
+        </div>
+      </div>
+      <div class="logged-out">
+        <div style="height: 300px;"></div>
+      </div>
+  
+  
+    
+    <footer class = "footer" style = "background-color: rgb(42, 55, 80);">
+      <div class="container" style="padding-top: 30px;">
+          <div class = "row">
+            <div class="col-md-2"></div>
+              <div class = "col-sm-12 col-md-10">
+                <h5 class = "white-text">Vivian's Blog</h5>
+              </div>
+            </div>    
+            <div class="row">
+              <div class="col-sm-4 col-md-2"></div>
+              <div class = "col-sm-4 col-sm-12 col-md-10">
+                <ul>
+                    <li><a href = "#" class = "grey-text text-lighten-4 align-center">
+                      關於我</a></li>
+                </ul>
+              </div>
+              <div class="col-sm-4"></div>
+            </div>
+        
+        
+          <div class="row">
+            <div class="col-sm-4 col-md-2"></div>
+            <div class="col-sm-4 col-md-10 grey-text text-lighten-4">
+              © 2020 
+            </div>
+            <div class="col-sm-4"></div>
+          </div>     
+      </div>  
+    </footer>
+  </div>
+
+
+  
+
+  <!-- <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-analytics.js"></script>
+   
+   <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-database.js"></script>
+  
+  <script src="https://www.gstatic.com/firebasejs/7.15.0/firebase-storage.js"></script>  
+
+  <script>
+    var firebaseConfig = {
+    apiKey: "AIzaSyA7CcEZ8Cm6BfNDXzSy2GNqw4KRhEKyrGk",
+    authDomain: "blog-8f917.firebaseapp.com",
+    databaseURL: "https://blog-8f917.firebaseio.com",
+    projectId: "blog-8f917",
+    storageBucket: "blog-8f917.appspot.com",
+    messagingSenderId: "472701333427",
+    appId: "1:472701333427:web:ab7be97f749227419965c6",
+    measurementId: "G-K0927WPTBW"
+  };
+  
+  firebase.initializeApp(firebaseConfig);
+  firebase.auth.Auth.Persistence.LOCAL;
+  firebase.analytics();
+  
+ 
+  const auth = firebase.auth();
+  const db = firebase.firestore();
+  const storage = firebase.storage();
+
+
+  </script> -->
+  <!-- Compiled and minified JavaScript -->
+  
+  <!-- js files -->
+  <script src="scripts/same.js"></script>
+  <script>
+    firebase.auth().onAuthStateChanged(function(user){
+      if (user){
+        var userID = firebase.auth().currentUser.uid;
+        firebase.database().ref('Users/' + userID).once('value').then(function(snapshot){
+        if (snapshot.val()){
+          window.location.href = "MainPage.html";
+        }else{
+          window.location.href = "accountsetting.html";
+        }
+      });
+      }
+      // else{
+      //   console.log("AAA");
+      // }
+    });
+  </script>  
+  
+  
+
+  
+  <!--   
+  <script src="scripts/auth.js"></script>
+  <script src="scripts/index.js"></script> -->
+  
+</body>
