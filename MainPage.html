@@ -19,9 +19,17 @@
 
  
 
-  <!-- jQUERY -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>    
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <!------- jQUERY -------->
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>    
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> -->
+  
+  <!-- show image (fade_in) -->
+  <script src="http://fb.me/react-0.8.0.js"></script>
+  <script src="http://fb.me/JSXTransformer-0.8.0.js"></script>
+  <!-- <script src="http://code.jquery.com/jquery-1.10.0.min.js"></script> -->
+  
+  <script src="scripts/jquery-3.5.1.js"></script>
+  <script src="scripts/jquery-3.5.1.min.map"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
   
 
@@ -30,11 +38,9 @@
    <!-- bootstrap -->
    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
    
-   <!-- show image (fade_in) -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-  <script src="http://fb.me/react-0.8.0.js"></script>
-  <script src="http://fb.me/JSXTransformer-0.8.0.js"></script>
-  <script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+   
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script> -->
+  
    
 
   <!-- firebase -->
@@ -57,45 +63,11 @@
   <title>Blog</title>
   </head>
   <body class="grey lighten-3">
-    <!-- <header id="index-header">
-        <div class="top-center">
-        </div>
-      </header> -->
     <!-- NAVBAR -->
     <div class="wrapper">
-      <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#" style="margin:0 80px;"></a>
-        <a href="#" class="brand-logo">
-          <img src="assets/img/LOGO.png" style="width: 120px;margin-left:30px;margin-top:10px;cursor:default;">
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavDropdown">
-          <ul class="navbar-nav">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">文章列表<span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link modal-trigger" data-target="modal-create" href="#">新增文章</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">我的帳戶</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                個人設定
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="#">登出</a>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </nav> -->
       <nav class="grey lighten-4">
         <div class="nav-wrapper container">
-          <a href="#" class="brand-logo">
+          <a href="MainPage.html" class="brand-logo">
             <img src="assets/img/LOGO.png" style="width: 120px;cursor:default;">
           </a>
           
@@ -111,15 +83,19 @@
               <a class="dropdown-item" href="#" id="btn-logout">登出</a>
             </div>
           </div> -->
+          
           <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li>
-                <a href="#" class="grey-text" style="font-size: 1.1rem;font-weight: bolder;">文章列表</a>
+                <a class="grey-text" id="create_post1" style="font-size: 1.1rem;font-weight: bolder;" onclick="switchView('home.html')">文章列表</a>
             </li>
             <li>
-              <a class="grey-text" data-toggle="modal" data-target="#modal-create" style="font-size: 1.1rem;font-weight: bolder;">新增文章</a>
+              <a class="grey-text show_post hidden" data-toggle="modal" data-target="#modal-create" style="font-size: 1.1rem;font-weight: bolder;">新增文章</a>
             </li>
             <li>
-              <a href="#" class="grey-text modal-trigger" data-target="modal-account" style="font-size: 1.1rem;font-weight: bolder;">我的帳戶</a>
+              <a href="#" class="grey-text" id="create_post2" style="font-size: 1.1rem;font-weight: bolder;" onclick="switchView('myposts.html')">我的文章</a>
+            </li>
+            <li>
+              <a href="#" class="grey-text "  id="create_post3" style="font-size: 1.1rem;font-weight: bolder;" onclick="switchView('myaccount.html')">我的帳戶</a>
             </li>
             <li>
               <a href="#" class="grey-text" id="btn-logout" style="font-size: 1.1rem;font-weight: bolder;">登出</a>
@@ -133,12 +109,11 @@
             <div class="close">
                 <div class="close-img"><img src="assets/img/close.png" alt=""></div>
             </div>
-            <p class="logout-rwd logged-in" >文章列表</p>
-            <p class="logout-rwd logged-in modal-trigger" data-target="modal-create">新增文章</p>
-            <p class="logout-rwd logged-in modal-trigger" data-target="modal-account">我的帳戶</p>
-            <p class="logout-rwd logged-in" id="logout">登出</p>
-            <p class="login-rwd modal-trigger logged-out" data-target="modal-login">登入</p>
-            <!-- <p class="signup-rwd modal-trigger logged-out" data-target="modal-signup">註冊</p> -->
+            <p class="black-text" id="create_post1_rwd" onclick="switchView('home.html')">文章列表</p>
+            <p class="black-text show_post hidden" data-toggle="modal" data-target="#modal-create">新增文章</p>
+            <p class="black-text" id="create_post2_rwd" onclick="switchView('myposts.html')">我的文章</p>
+            <p class="black-text" id="create_post3_rwd" onclick="switchView('myaccount.html')">我的帳戶</p>
+            <p class="black-text" id="btn-logout">登出</p>
           </div>
         </div>
       </nav>
@@ -172,13 +147,49 @@
   
     
     <!-- ACCOUNT MODAL -->
-    <div id="modal-account" class="modal">
+    <!-- <div id="modal-account" class="modal">
       <div class="modal-content center-align">
-        <h2>我的帳戶</h2><br />
-        <div class="account-details"></div>
-        <div class="account-extras"></div>
+        <h2 style="text-align: center;margin-bottom: 30px;font-weight:bold;">我的帳戶</h2 style="text-align: center;">
+          <br>
+          <hr>
+          <br><br><br>
+          <div class="container">
+              <div class="row">
+              <div class="col-md-2"></div>
+              <div class="col-sm-12 col-md-8" id="mycontent">
+              </div>
+              <div class="col-md-2"></div>
+              </div>
+          </div>
+          <br>
       </div>
     </div>
+    <script>
+      firebase.auth().onAuthStateChanged(function(user){
+          if (user){
+              
+              var userID = firebase.auth().currentUser.uid;
+              var personal = "";
+              var databaseRef = firebase.database().ref('Users/' + userID).once('value').then(function(snapshot){
+                  
+                  personal      += "<div class='container' style='text-align:center;'>"
+                      personal  += "<h4 style='font-weight:bold;'>使用者名稱: </h4>" + "<p>" + snapshot.val().username + "</p>"
+                      personal  += "<h4 style='font-weight:bold;'>興趣嗜好: </h4>" + "<p>" + snapshot.val().interest + "</p>"
+                  personal      += "</div>";
+                  personal      += "<div style='height:200px;'></div>"
+                  console.log(personal);    
+  
+                  //         personal  += "<div style='font-size:22px; font-weight:bold;'><h4 style='font-weight:bold;'>";
+                  //     personal  += "標題: "  + "</h4></div>" 
+                  //             +  "<p>" + snapshot.val().username
+                  // personal    += "</p> <br>";
+                  $('#mycontent').html(personal);
+              });
+              // console.log(personal);
+              
+          }
+      });
+  </script> -->
   
     <!-- CREATE GUIDE MODAL -->
     <!-- <div id="modal-create" class="modal" style="overflow: scroll;">
@@ -279,235 +290,163 @@
         </div>
       </div>
     </div>
-        <!-- After blog post area start-->
-    <!-- <br><br><br> -->
-    
-    <!-- <br><br><br> -->
-    <h2 style="text-align: center;margin-bottom: 30px;font-weight:bold;">文章列表</h2 style="text-align: center;">
-    <br>
-    <hr>
-    <br><br><br>
-    <div class="container">
+        
+    <div id="container">
+      <div class="row" style="margin:0;">
+        <div class="col" style="width:200px;height:50px;"></div>
+      </div>
       <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-sm-12 col-md-8" id="post">
+        <!-- <div class="col-md-1"></div> -->
+        <div class="col-sm-12 col-md-6">
+          <h2 class="title" style="text-align: center !important;">Welcome to my Blog~~</h2>
+          <h4 class="title" style="text-align: center !important;font-size: 24px;font-family:Microsoft JhengHei;">查看「文章列表」</h4>
+          
         </div>
-        <div class="col-md-2"></div>
+        <div class="col-sm-12 col-md-6">
+          <div class="mainpage-image">
+            <img src="assets/img/girl.png" width="250" alt="svg">
+          </div>
+        </div>
       </div>
     </div>
-    <br>
-        <!-- After blog post area end-->
-      
-        <!--------- javascript ----------->
-        
-        <script>
-          
-          
-          var validImagetypes = ["image/gif", "image/jpeg", "image/png"];
+    
+    <script>
+      var validImagetypes = ["image/gif", "image/jpeg", "image/png"];
 
-          $("#selected-image").hide();
-          
-          function previewImage(image_post){
-            if (image_post.files && image_post.files[0]){
-              var reader = new FileReader();
-              reader.onload = function(e){
-                $("#selected-image").attr('src',e.target.result);
-                $("#selected-image").fadeIn();
-              }
-              reader.readAsDataURL(image_post.files[0]);
-              // $("#selected-image").show();
-            }
+      $("#selected-image").hide();
+
+      function previewImage(image_post){
+      if (image_post.files && image_post.files[0]){
+          var reader = new FileReader();
+          reader.onload = function(e){
+          $("#selected-image").attr('src',e.target.result);
+          $("#selected-image").fadeIn();
           }
+          reader.readAsDataURL(image_post.files[0]);
+          // $("#selected-image").show();
+          }
+      }
 
-          $("#main-image").change(function(){
-            previewImage(this);
-          });
+      $("#main-image").change(function(){
+      previewImage(this);
+      });
 
-          $("#save-post").click(function(){
-            
-            var title = $("#title").val();
-            var desc = $("#main-desc").val();
-            var picture = $("#main-image").prop("files")[0];
+      $("#save-post").click(function(){
 
-            $("#main-desc").removeClass("is-invalid");
-            $("#title").removeClass("is-invalid");
-            $("#main-image").removeClass("is-invalid");
-            
-            if (!title){
+      var title = $("#title").val();
+      var desc = $("#main-desc").val();
+      var picture = $("#main-image").prop("files")[0];
+
+      $("#main-desc").removeClass("is-invalid");
+      $("#title").removeClass("is-invalid");
+      $("#main-image").removeClass("is-invalid");
+
+      if (!title){
+          
+          $("#title").addClass("is-invalid");
+          return;
+      }
+      if (!desc){
+          $("#main-desc").addClass("is-invalid");
+          return;
+      }
+      if (picture == null){
+          $("#main-image").addClass("is-invalid");
+          return;
+      }
+      if($.inArray(picture["type"], validImagetypes)<0){
+          $("#main-image").addClass("is-invalid");
+          return;
+      }
+
+      // Upload and save to firebase
+
+      var databaseRef = firebase.database().ref().child("blog");
+
+      databaseRef.once("value").then(function(snapshot){
+          var name = picture['name'];
+          var dataStr = new Date().getTime();
+          var fileCompleteName = name + "_" + dataStr;
+          
+          var storageRef = firebase.storage().ref("post images");
+          var poststorageRef = storageRef.child(fileCompleteName);
+
+          var uploadTask = poststorageRef.put(picture);
+
+          uploadTask.on("state_changed",
+          
+              function progress(snapshot){
+              var percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+              $("#upload-progress").html(Math.round(percentage) + "%");
+              $("#upload-progress").attr("style", "width:" + percentage + "%");
+              },
+              function error(err){
               
-              $("#title").addClass("is-invalid");
-              return;
-            }
-            if (!desc){
-              $("#main-desc").addClass("is-invalid");
-              return;
-            }
-            if (picture == null){
-              $("#main-image").addClass("is-invalid");
-              return;
-            }
-            if($.inArray(picture["type"], validImagetypes)<0){
-              $("#main-image").addClass("is-invalid");
-              return;
-            }
+              },
+              function complete(){
+              var user = firebase.auth().currentUser;
+              var userName;
+              firebase.database().ref('Users/' + user.uid).once('value').then(function(snapshot){
+                  var fName = (snapshot.val() && snapshot.val().username);
+                  userName = fName;
+              });
+              console.log(userName);
+              uploadTask.snapshot.ref.getDownloadURL().then(function(downloadUrl){
+                  var time = new Date();
 
-            // Upload and save to firebase
-            
-            var databaseRef = firebase.database().ref().child("blog");
+                  var options = {
+                  year:"numeric",
+                  month:"long",
+                  day:"2-digit",
+                  weekday:"long",
+                  };
 
-            databaseRef.once("value").then(function(snapshot){
-              var name = picture['name'];
-              var dataStr = new Date().getTime();
-              var fileCompleteName = name + "_" + dataStr;
-              
-              var storageRef = firebase.storage().ref("post images");
-              var poststorageRef = storageRef.child(fileCompleteName);
+                  var postData = {
+                  
+                  "image" : downloadUrl,
+                  "name" : fileCompleteName,
+                  "desc" : desc,
+                  "title" :title,
+                  "uid" :user.uid,
+                  "counter" : 5000 - counter,
+                  "username" : userName,
+                  "time": time.toLocaleDateString('Taiwan',{hour:"numeric",minute:"numeric", hour12:true}),
+                  "date" : time.toLocaleDateString('Taiwan',options),
+                  };
+                  // console.log(options,postData);
+                  console.log(userName);
+                  var newPostRef = databaseRef.push();
 
-              var uploadTask = poststorageRef.put(picture);
-
-              uploadTask.on("state_changed",
-                
-                  function progress(snapshot){
-                    var percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                    $("#upload-progress").html(Math.round(percentage) + "%");
-                    $("#upload-progress").attr("style", "width:" + percentage + "%");
-                  },
-                  function error(err){
-                    
-                  },
-                  function complete(){
-                    var user = firebase.auth().currentUser;
-                    var userName;
-                    firebase.database().ref('Users/' + user.uid).once('value').then(function(snapshot){
-                      var fName = (snapshot.val() && snapshot.val().username);
-                      userName = fName;
-                    });
-                    console.log(userName);
-                    uploadTask.snapshot.ref.getDownloadURL().then(function(downloadUrl){
-                      var time = new Date();
-
-                      var options = {
-                        year:"numeric",
-                        month:"long",
-                        day:"2-digit",
-                        weekday:"long",
-                      };
-
-                      var postData = {
-                        
-                        "image" : downloadUrl,
-                        "name" : fileCompleteName,
-                        "desc" : desc,
-                        "title" :title,
-                        "uid" :user.uid,
-                        "counter" : 5000 - counter,
-                        "username" : userName,
-                        "time": time.toLocaleDateString('Taiwan',{hour:"numeric",minute:"numeric", hour12:true}),
-                        "date" : time.toLocaleDateString('Taiwan',options),
-                      };
-                      // console.log(options,postData);
-                      console.log(userName);
-                      var newPostRef = databaseRef.push();
-
-                      newPostRef.set(postData, function(err){
-                        if (err){
-                          console.log("失敗");
-                          $("#result").attr("class", "alert alert-danger");
-                          $("#result").html(err.message);
-                        }
-                        else {
-                          console.log("成功");
-                          $("#result").attr("class", "alert alert-success");
-                          $("#result").html("成功上傳貼文!");
-                          // $("#modal-create").modal('remove');
-                          window.open("","_self");
-                        }
-                        // resetForm();
-                      });
-                    });
+                  newPostRef.set(postData, function(err){
+                  if (err){
+                      console.log("失敗");
+                      $("#result").attr("class", "alert alert-danger");
+                      $("#result").html(err.message);
                   }
-              );
-          });
-          
+                  else {
+                      console.log("成功");
+                      $("#result").attr("class", "alert alert-success");
+                      $("#result").html("成功上傳貼文!");
+                      // $("#modal-create").modal('remove');
+                      window.open("","_self");
+                  }
+                  resetForm();
+                  });
+                });
+              }
+            );
         });
-        var firebaseConfig = {
-          apiKey: "AIzaSyA7CcEZ8Cm6BfNDXzSy2GNqw4KRhEKyrGk",
-          authDomain: "blog-8f917.firebaseapp.com",
-          databaseURL: "https://blog-8f917.firebaseio.com",
-          projectId: "blog-8f917",
-          storageBucket: "blog-8f917.appspot.com",
-          messagingSenderId: "472701333427",
-          appId: "1:472701333427:web:ab7be97f749227419965c6",
-          measurementId: "G-K0927WPTBW"
-        };
-        firebase.initializeApp(firebaseConfig);
-        firebase.auth.Auth.Persistence.LOCAL;
-        firebase.analytics();  
-        
 
-        function resetForm(){
-          
+      });
+      function resetForm(){
+    
           $("#create-post")[0].reset();
           $("#selected-image").fadeOut();
           $("#upload-progress").html("completed");
-        }
-
-        // retrieve and display from database
-  
-        var dbblogs = firebase.database().ref().child("blog").orderByChild("counter");
-
-        dbblogs.on("value",function(post){
-          if (post.exists){
-            var postHtml = "";
-            post.forEach(function(singlepost){
-              counter = counter + 1;
-              postHtml += "<div class='jumbotron bg-light text-dark border border-dark post-card'>";
-                
-                postHtml += "<div><img class='post-image' src='";
-                  postHtml += singlepost.val().image;
-                postHtml += "'  /> </div> <br>";
-
-                postHtml += "<div class='row' style='margin-top:30px;margin-bottom:0;'>";
-                  postHtml += "<div class='col-sm-5'><p style='color:grey;'>" 
-                           + "作者: " + singlepost.val().username
-                           + "</p></div>" +
-                          "<div class='col-sm-3'><p style='color:grey;'>" 
-                           + "發佈時間: " + singlepost.val().time 
-                           + "</p></div>" +
-                          "<div class='col-sm-4'><p style='color:grey;'>" 
-                           + "發佈日期: " + singlepost.val().date  
-                           + "</p></div>"
-                           ;
-                postHtml += "</div> <br>";
-                
-                postHtml += "<div style='font-size:22px; font-weight:bold;'><h4 style='font-weight:bold;'>";
-                  postHtml += "標題: "  + "</h4></div>" 
-                           +  "<p>" + singlepost.val().title 
-                postHtml   += "</p> <br>";
-                postHtml += "<div style='font-size:22px; font-weight:bold;'><h4 style='font-weight:bold;'>";
-                  postHtml += "內文: "  + "</h4></div>" 
-                           +  "<p style='text-align:justify;'>" + singlepost.val().desc 
-                postHtml   += "</p> <br>";
-
-              postHtml += "</div>";
-            });
-            $('#post').html(postHtml);
-          }
-        })
-
-
-        ///////retrieve end here
-        </script>
-      
+      }
+    </script>
     
-    <!-- GUIDE LIST -->
-    <!-- <div class="container logged-in" style="margin-top: 40px;">
-      <div class="post"></div>
-      <div class="comment" id="create-comment">
-      </div>
-      
-    </div> -->
-    <div style="height: 200px;"></div>
+    <div style="height: 270px;"></div>
     <footer class = "footer" style = "background-color: rgb(42, 55, 80);">
       <div class="container" style="padding-top: 30px;">
         <div class = "row">

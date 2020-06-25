@@ -147,3 +147,33 @@ $('.login-rwd').click(function() {
 $('.signup-rwd').click(function() {
   $('.hamburger').removeClass('show')
 })
+
+function switchView(view){
+  
+  $.get({
+    url:view,
+    catche:false,
+  })
+  .then(function(data){
+    $('#container').html(data)
+  });
+}
+
+$('#create_post1').click(function(){
+  $('.show_post').removeClass('hidden');
+});
+$('#create_post2').click(function(){
+  $('.show_post').removeClass('hidden');
+});
+$('#create_post3').click(function(){
+  $('.show_post').addClass('hidden');
+});
+$('#create_post1_rwd').click(function(){
+  $('.show_post').removeClass('hidden');
+});
+$('#create_post2_rwd').click(function(){
+  $('.show_post').removeClass('hidden');
+});
+$('#create_post3_rwd').click(function(){
+  $('.show_post').addClass('hidden');
+});

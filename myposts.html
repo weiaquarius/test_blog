@@ -1,0 +1,226 @@
+<h2 style="text-align: center;margin-bottom: 30px;font-weight:bold;">我的文章</h2 style="text-align: center;">
+<br>
+<hr>
+<br><br><br>
+<div class="container">
+    <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-sm-12 col-md-8" id="post">
+    </div>
+    <div class="col-md-2"></div>
+    </div>
+</div>
+<br>
+<!-- After blog post area end-->
+
+<!--------- javascript ----------->
+
+<script>
+    var counter = 0;
+    var validImagetypes = ["image/gif", "image/jpeg", "image/png"];
+
+    $("#selected-image").hide();
+    
+    function previewImage(image_post){
+    if (image_post.files && image_post.files[0]){
+        var reader = new FileReader();
+        reader.onload = function(e){
+        $("#selected-image").attr('src',e.target.result);
+        $("#selected-image").fadeIn();
+        }
+        reader.readAsDataURL(image_post.files[0]);
+        // $("#selected-image").show();
+        }
+    }
+
+    $("#main-image").change(function(){
+    previewImage(this);
+    });
+
+    $("#save-post").click(function(){
+    
+    var title = $("#title").val();
+    var desc = $("#main-desc").val();
+    var picture = $("#main-image").prop("files")[0];
+
+    $("#main-desc").removeClass("is-invalid");
+    $("#title").removeClass("is-invalid");
+    $("#main-image").removeClass("is-invalid");
+    
+    if (!title){
+        
+        $("#title").addClass("is-invalid");
+        return;
+    }
+    if (!desc){
+        $("#main-desc").addClass("is-invalid");
+        return;
+    }
+    if (picture == null){
+        $("#main-image").addClass("is-invalid");
+        return;
+    }
+    if($.inArray(picture["type"], validImagetypes)<0){
+        $("#main-image").addClass("is-invalid");
+        return;
+    }
+
+    // Upload and save to firebase
+    
+    var databaseRef = firebase.database().ref().child("blog");
+
+    databaseRef.once("value").then(function(snapshot){
+        var name = picture['name'];
+        var dataStr = new Date().getTime();
+        var fileCompleteName = name + "_" + dataStr;
+        
+        var storageRef = firebase.storage().ref("post images");
+        var poststorageRef = storageRef.child(fileCompleteName);
+
+        var uploadTask = poststorageRef.put(picture);
+
+        uploadTask.on("state_changed",
+        
+            function progress(snapshot){
+            var percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            $("#upload-progress").html(Math.round(percentage) + "%");
+            $("#upload-progress").attr("style", "width:" + percentage + "%");
+            },
+            function error(err){
+            
+            },
+            function complete(){
+            var user = firebase.auth().currentUser;
+            var userName;
+            firebase.database().ref('Users/' + user.uid).once('value').then(function(snapshot){
+                var fName = (snapshot.val() && snapshot.val().username);
+                userName = fName;
+            });
+            console.log(userName);
+            uploadTask.snapshot.ref.getDownloadURL().then(function(downloadUrl){
+                var time = new Date();
+
+                var options = {
+                    year:"numeric",
+                    month:"long",
+                    day:"2-digit",
+                    weekday:"long",
+                };
+
+                var postData = {
+                
+                "image" : downloadUrl,
+                "name" : fileCompleteName,
+                "desc" : desc,
+                "title" :title,
+                "uid" :user.uid,
+                "counter" : 5000 - counter,
+                "username" : userName,
+                "time": time.toLocaleDateString('Taiwan',{hour:"numeric",minute:"numeric", hour12:true}),
+                "date" : time.toLocaleDateString('Taiwan',options),
+                };
+                // console.log(options,postData);
+                console.log(userName);
+                var newPostRef = databaseRef.push();
+
+                newPostRef.set(postData, function(err){
+                if (err){
+                    console.log("失敗");
+                    $("#result").attr("class", "alert alert-danger");
+                    $("#result").html(err.message);
+                }
+                else {
+                    console.log("成功");
+                    $("#result").attr("class", "alert alert-success");
+                    $("#result").html("成功上傳貼文!");
+                    // $("#modal-create").modal('remove');
+                    window.open("","_self");
+                }
+                resetForm();
+                });
+            });
+            }
+        );
+    });
+    
+});
+    function resetForm(){
+        
+        $("#create-post")[0].reset();
+        $("#selected-image").fadeOut();
+        $("#upload-progress").html("completed");
+    }
+    // retrieve and display from database
+    var user = firebase.auth().currentUser;
+    var dbblogs = firebase.database().ref().child("blog").orderByChild("uid").equalTo(user.uid);
+
+    dbblogs.on("value",function(post){
+        
+        if (post.exists){
+            var postHtml = "";
+            post.forEach(function(singlepost){
+                counter = counter + 1;
+                postHtml += "<div class='jumbotron bg-light text-dark border border-dark post-card'>";
+                
+                // postHtml += "<div class='form-group' style='text-align:center;'>";
+                //     postHtml += "<button class='form-control btn-light bg-dark text-white'>刪除文章</button>"
+                // postHtml += "</div><br>"
+                // postHtml += "<div class='form-group' style='text-align:center;'>";
+                    postHtml += "<button class='btn btn-secondary' onclick=deletepost('"+singlepost.key+"') style='float:right;'>刪除文章</button>";
+                // postHtml += "</div><br>"
+                postHtml += "<div><img class='post-image' src='";
+                    postHtml += singlepost.val().image;
+                postHtml += "'  /> </div> <br>";
+
+                postHtml += "<div class='row' style='margin-top:30px;margin-bottom:0;'>";
+                    postHtml += "<div class='col-sm-5'><p style='color:grey;'>" 
+                            + "作者: " + singlepost.val().username
+                            + "</p></div>" +
+                            "<div class='col-sm-3'><p style='color:grey;'>" 
+                            + "發佈時間: " + singlepost.val().time 
+                            + "</p></div>" +
+                            "<div class='col-sm-4'><p style='color:grey;'>" 
+                            + "發佈日期: " + singlepost.val().date  
+                            + "</p></div>"
+                            ;
+                postHtml += "</div> <br>";
+                
+                postHtml += "<div style='font-size:22px; font-weight:bold;'><h4 style='font-weight:bold;'>";
+                    postHtml += "標題: "  + "</h4></div>" 
+                            +  "<p>" + singlepost.val().title 
+                postHtml   += "</p> <br>";
+                postHtml += "<div style='font-size:22px; font-weight:bold;'><h4 style='font-weight:bold;'>";
+                    postHtml += "內文: "  + "</h4></div>" 
+                            +  "<p style='text-align:justify;'>" + singlepost.val().desc 
+                postHtml   += "</p> <br>";
+
+                postHtml += "</div>";
+            });
+            $('#post').html(postHtml);
+        }
+        
+    })
+
+    // if (!exist){
+    //         var content = "";
+    //         content += "<h3 style='font-weight:bold;'>沒有新貼文喔~~</h3>";
+    //         content += "<h3 style='font-size:20px;'>快去新增貼文吧><</h style='font-size:20px;'>";
+    //         content += "<div style='height:200px;'></div>";
+    //         $('#post').html(content);
+    // }
+
+    function deletepost(key){
+        var deleteRef = firebase.database().ref().child("blog").child(key);
+
+        return deleteRef.remove()
+        .then(function(){
+            window.alert("刪除成功!!!");
+            console.log("Removed Successfully!");
+        }).catch(function(){
+            console.log("Error Occurred.");
+        });
+    }
+    // console.log(exist);
+    ///////retrieve end here
+</script>
+<div style='height:200px;'></div>

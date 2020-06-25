@@ -1,0 +1,40 @@
+<h2 style="text-align: center;margin-bottom: 30px;font-weight:bold;">我的帳戶</h2 style="text-align: center;">
+<br>
+<hr>
+
+<div class="container">
+    <div class="row">
+    <div class="col-md-2 col-lg-3"></div>
+    <div class="col-sm-12 col-md-8 col-lg-6" id="mycontent">
+    </div>
+    <div class="col-md-2 col-lg-3"></div>
+    </div>
+</div>
+<br>
+
+<script>
+    firebase.auth().onAuthStateChanged(function(user){
+        if (user){
+            
+            var userID = firebase.auth().currentUser.uid;
+            var personal = "";
+            var databaseRef = firebase.database().ref('Users/' + userID).once('value').then(function(snapshot){
+                
+                personal      += "<div class='container' style='text-align:center;'>"
+                    personal  += "<h4 class='bio-title'>使用者名稱: </h4>" + "<p class='bio-content'>" + snapshot.val().username + "</p>"
+                    personal  += "<h4 class='bio-title'>興趣嗜好: </h4>" + "<p class='bio-content bio-content2'>" + snapshot.val().interest + "</p>"
+                personal      += "</div>";
+                personal      += "<div style='height:200px;'></div>"
+                console.log(personal);    
+
+                //         personal  += "<div style='font-size:22px; font-weight:bold;'><h4 style='font-weight:bold;'>";
+                //     personal  += "標題: "  + "</h4></div>" 
+                //             +  "<p>" + snapshot.val().username
+                // personal    += "</p> <br>";
+                $('#mycontent').html(personal);
+            });
+            // console.log(personal);
+            
+        }
+    });
+</script>
