@@ -90,9 +90,12 @@ $("#btn-signup").click(function(){
 
 //logout
 $("#btn-logout").click(function(){
-
- firebase.auth().signOut();
+  firebase.auth().signOut();
 });  
+$("#btn-logout-rwd").click(function(){
+  firebase.auth().signOut();
+});  
+
 
 //acccount
 $("#btn-account").click(function(){
