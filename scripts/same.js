@@ -59,7 +59,6 @@ $("#btn-login").click(function(){
 
 //signup
 $("#btn-signup").click(function(){
-  console.log("11");
   var email = $("#signup-email").val();
   var password = $("#signup-password").val();    
   var cpassword = $("#confirmpassword").val();    
