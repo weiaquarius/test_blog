@@ -14,162 +14,368 @@
 <!-- After blog post area end-->
 
 <!--------- javascript ----------->
+<div id="modal-update" class="modal fade" aria-hidden="true" aria-labelledby="ModalTitle" style="overflow: scroll;">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="contact-us">
+          <!-------------- POST AREA ------------------>
+          <div class="modal-header">
+            <h4 id="ModalTitle" class="modal-title">編輯文章Edit Post</h4><br />
+          </div>
+          <div class="modal-body">
+            <form action="#" id="update-post">
+            
+              <div class="form-group">
+                <label for="update-title" style="font-family:Microsoft JhengHei;" >文章標題TITLE<em>&#x2a;</em></label>
+                <script>
+
+                </script><input id="update-title" name="update-title" required="" type="text" />
+                <div class="invalid-feedback">
+                  請輸入文章標題
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <label for="update-content" style="font-family:Microsoft JhengHei;">文章內容CONTENT<em>&#x2a;</em></label>
+                <textarea id="update-content" name="content" required="" rows="5"></textarea>
+                <div class="invalid-feedback">
+                  請輸入文章內容
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="image" style="font-family:Microsoft JhengHei;">背景照片IMAGE<em>&#x2a;</em></label>
+                <input type="file" class="form-control-file" id="update-image">
+                <div class="invalid-feedback">
+                  請選擇一張背景照片
+                </div>
+              </div>
+              <div class="form-group">
+                <img id="selected2-image" width="60%" height="300px" src="#" alt="背景圖片">
+              </div>
+              <div class="form-group">
+                <div class="progress bg-secondary">
+                  <div class="progress-bar bg-success" id="update-progress" style="width:0%;">0%</div>
+                  </div>
+              </div>
+
+              <div id="result2">
+  
+              </div>
+              <div class="form-group" style="margin-top:30px;">
+                <button class="btn btn-primary" type="button" id="update-btn" style="background:#1E2D61;margin-top:10px;">確定</button>
+              </div>
+              <div class="form-group" style="margin-top:30px;">
+                <button class="btn btn-primary" type="button" style="background:#485da8;margin-top:10px;margin-right:30px;" data-dismiss="modal">關閉</button>
+              </div>
+            </form>                
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+<script>
+    var validImagetypes = ["image/gif", "image/jpeg", "image/png"];
+    var presentkey = "";
+    $("#selected2-image").show();
+    
+    function previewImage2(image_post){
+        if (image_post.files && image_post.files[0]){
+            var reader = new FileReader();
+            reader.onload = function(e){
+                $("#selected2-image").attr('src',e.target.result);
+                $("#selected2-image").fadeIn();
+            }
+            reader.readAsDataURL(image_post.files[0]);
+            // $("#selected2-image").show();
+        }
+    }
+    
+    $("#update-image").change(function(){
+        previewImage2(this);
+    });
+    
+    $("#update-btn").click(function(){
+        
+        var title = $("#update-title").val();
+        var desc = $("#update-content").val();
+        var picture = $("#update-image").prop("files")[0];
+
+        $("#update-content").removeClass("is-invalid");
+        $("#update-title").removeClass("is-invalid");
+        $("#update-image").removeClass("is-invalid");
+
+        if (!title){
+            $("#update-title").addClass("is-invalid");
+            return;
+        }
+        if (!desc){
+            $("#update-content").addClass("is-invalid");
+            return;
+        }
+        if (picture == null){
+            $("#update-image").addClass("is-invalid");
+            return;
+        }
+        if($.inArray(picture["type"], validImagetypes)<0){
+            $("#update-image").addClass("is-invalid");
+            window.alert("圖片只能使用jpeg,png,gif檔");
+            return;
+        }
+     
+
+        var databaseRef = firebase.database().ref().child("blog");
+
+        databaseRef.once("value").then(function(snapshot){
+            var name = picture['name'];
+            var dataStr = new Date().getTime();
+            var fileCompleteName = name + "_" + dataStr;
+            var storageRef = firebase.storage().ref("post images");
+            var poststorageRef = storageRef.child(fileCompleteName);
+
+            var uploadTask = poststorageRef.put(picture);
+
+            uploadTask.on("state_changed",
+            
+                function progress(snapshot){
+                    var percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    $("#update-progress").html(Math.round(percentage) + "%");
+                    $("#update-progress").attr("style", "width:" + percentage + "%");
+                },
+                function error(err){
+                
+                },
+                function complete(){
+                    // console.log("UUUUUUUUUU");
+                    var user = firebase.auth().currentUser;
+                    console.log(user);
+                    var userName;
+                    firebase.database().ref('Users/' + user.uid).once('value').then(function(snapshot){
+                        var fName = (snapshot.val() && snapshot.val().username);
+                        userName = fName;
+                    });
+                    uploadTask.snapshot.ref.getDownloadURL().then(function(downloadUrl){
+                        var time = new Date();
+                        var options = {
+                            year:"numeric",
+                            month:"long",
+                            day:"2-digit",
+                            weekday:"long",
+                        };
+
+                        var postData = {
+                        
+                            "image" : downloadUrl,
+                            "name" : fileCompleteName,
+                            "desc" : desc,
+                            "title" :title,
+                            "uid" :user.uid,
+                            // "counter" : 5000 - counter,
+                            "username" : userName,
+                            "time": time.toLocaleDateString('Taiwan',{hour:"numeric",minute:"numeric", hour12:true}),
+                            "date" : time.toLocaleDateString('Taiwan',options),
+                        };
+                        var db = firebase.database();
+                        // console.log(postData,options);
+                        console.log(presentkey);
+                        newPostRef = db.ref('blog/' + presentkey).set({
+                            image : downloadUrl,
+                            name : fileCompleteName,
+                            desc : desc,
+                            title :title,
+                            uid :user.uid,
+                            counter : 5000 - counter,
+                            username : userName,
+                            time: time.toLocaleDateString('Taiwan',{hour:"numeric",minute:"numeric", hour12:true}),
+                            date : time.toLocaleDateString('Taiwan',options),
+                        });
+                        
+               
+                        
+                        
+                    });
+
+                }
+                       
+            )
+        });            
+    });
+    // function resetForm(){
+
+    //     $("#update-post")[0].reset();
+    //     $("#selected2-image").fadeOut();
+    //     $("#update-progress").html("completed");
+    // }
+
+</script>
 
 <script>
-    var counter = 0;
-    var validImagetypes = ["image/gif", "image/jpeg", "image/png"];
+    // var counter = 0;
+    // var validImagetypes = ["image/gif", "image/jpeg", "image/png"];
 
-    $("#selected-image").hide();
+    // $("#selected-image").hide();
     
-    function previewImage(image_post){
-    if (image_post.files && image_post.files[0]){
-        var reader = new FileReader();
-        reader.onload = function(e){
-        $("#selected-image").attr('src',e.target.result);
-        $("#selected-image").fadeIn();
-        }
-        reader.readAsDataURL(image_post.files[0]);
-        // $("#selected-image").show();
-        }
-    }
+    // function previewImage(image_post){
+    //     if (image_post.files && image_post.files[0]){
+    //         var reader = new FileReader();
+    //         reader.onload = function(e){
+    //             $("#selected-image").attr('src',e.target.result);
+    //             $("#selected-image").fadeIn();
+    //         }
+    //         reader.readAsDataURL(image_post.files[0]);
+    //         // $("#selected-image").show();
+    //     }
+    // }
 
-    $("#main-image").change(function(){
-    previewImage(this);
-    });
+    // $("#main-image").change(function(){
+    //     previewImage(this);
+    // });
 
-    $("#save-post").click(function(){
-    
-    var title = $("#title").val();
-    var desc = $("#main-desc").val();
-    var picture = $("#main-image").prop("files")[0];
-
-    $("#main-desc").removeClass("is-invalid");
-    $("#title").removeClass("is-invalid");
-    $("#main-image").removeClass("is-invalid");
-    
-    if (!title){
+    // $("#save-post").click(function(){
         
-        $("#title").addClass("is-invalid");
-        return;
-    }
-    if (!desc){
-        $("#main-desc").addClass("is-invalid");
-        return;
-    }
-    if (picture == null){
-        $("#main-image").addClass("is-invalid");
-        return;
-    }
-    if($.inArray(picture["type"], validImagetypes)<0){
-        $("#main-image").addClass("is-invalid");
-        return;
-    }
+    //     var title = $("#title").val();
+    //     var desc = $("#main-desc").val();
+    //     var picture = $("#main-image").prop("files")[0];
 
-    // Upload and save to firebase
-    
-    var databaseRef = firebase.database().ref().child("blog");
-
-    databaseRef.once("value").then(function(snapshot){
-        var name = picture['name'];
-        var dataStr = new Date().getTime();
-        var fileCompleteName = name + "_" + dataStr;
+    //     $("#main-desc").removeClass("is-invalid");
+    //     $("#title").removeClass("is-invalid");
+    //     $("#main-image").removeClass("is-invalid");
         
-        var storageRef = firebase.storage().ref("post images");
-        var poststorageRef = storageRef.child(fileCompleteName);
-
-        var uploadTask = poststorageRef.put(picture);
-
-        uploadTask.on("state_changed",
-        
-            function progress(snapshot){
-            var percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            $("#upload-progress").html(Math.round(percentage) + "%");
-            $("#upload-progress").attr("style", "width:" + percentage + "%");
-            },
-            function error(err){
+    //     if (!title){
             
-            },
-            function complete(){
-            var user = firebase.auth().currentUser;
-            var userName;
-            firebase.database().ref('Users/' + user.uid).once('value').then(function(snapshot){
-                var fName = (snapshot.val() && snapshot.val().username);
-                userName = fName;
-            });
-            console.log(userName);
-            uploadTask.snapshot.ref.getDownloadURL().then(function(downloadUrl){
-                var time = new Date();
+    //         $("#title").addClass("is-invalid");
+    //         return;
+    //     }
+    //     if (!desc){
+    //         $("#main-desc").addClass("is-invalid");
+    //         return;
+    //     }
+    //     if (picture == null){
+    //         $("#main-image").addClass("is-invalid");
+    //         return;
+    //     }
+    //     if($.inArray(picture["type"], validImagetypes)<0){
+    //         $("#main-image").addClass("is-invalid");
+    //         window.alert("圖片只能使用jpeg,png,gif檔");
+    //         return;
+    //     }
 
-                var options = {
-                    year:"numeric",
-                    month:"long",
-                    day:"2-digit",
-                    weekday:"long",
-                };
-
-                var postData = {
-                
-                "image" : downloadUrl,
-                "name" : fileCompleteName,
-                "desc" : desc,
-                "title" :title,
-                "uid" :user.uid,
-                "counter" : 5000 - counter,
-                "username" : userName,
-                "time": time.toLocaleDateString('Taiwan',{hour:"numeric",minute:"numeric", hour12:true}),
-                "date" : time.toLocaleDateString('Taiwan',options),
-                };
-                // console.log(options,postData);
-                console.log(userName);
-                var newPostRef = databaseRef.push();
-
-                newPostRef.set(postData, function(err){
-                if (err){
-                    console.log("失敗");
-                    $("#result").attr("class", "alert alert-danger");
-                    $("#result").html(err.message);
-                }
-                else {
-                    console.log("成功");
-                    $("#result").attr("class", "alert alert-success");
-                    $("#result").html("成功上傳貼文!");
-                    // $("#modal-create").modal('remove');
-                    window.open("","_self");
-                }
-                resetForm();
-                });
-            });
-            }
-        );
-    });
-    
-});
-    function resetForm(){
+    //     // Upload and save to firebase
         
-        $("#create-post")[0].reset();
-        $("#selected-image").fadeOut();
-        $("#upload-progress").html("completed");
-    }
+    //     var databaseRef = firebase.database().ref().child("blog");
+
+    //     databaseRef.once("value").then(function(snapshot){
+    //         var name = picture['name'];
+    //         var dataStr = new Date().getTime();
+    //         var fileCompleteName = name + "_" + dataStr;
+            
+    //         var storageRef = firebase.storage().ref("post images");
+    //         var poststorageRef = storageRef.child(fileCompleteName);
+
+    //         var uploadTask = poststorageRef.put(picture);
+    //         console.log("AAAA");
+    //         uploadTask.on("state_changed",
+            
+    //             function progress(snapshot){
+    //                 var percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+    //                 $("#upload-progress").html(Math.round(percentage) + "%");
+    //                 $("#upload-progress").attr("style", "width:" + percentage + "%");
+    //             },
+    //             // function error(err){
+                
+    //             // },
+    //             function complete(){
+    //                 var user = firebase.auth().currentUser;
+    //                 var userName;
+    //                 firebase.database().ref('Users/' + user.uid).once('value').then(function(snapshot){
+    //                     var fName = (snapshot.val() && snapshot.val().username);
+    //                     userName = fName;
+    //                 });
+    //                 console.log(userName);
+    //                 uploadTask.snapshot.ref.getDownloadURL().then(function(downloadUrl){
+    //                     var time = new Date();
+
+    //                     var options = {
+    //                         year:"numeric",
+    //                         month:"long",
+    //                         day:"2-digit",
+    //                         weekday:"long",
+    //                     };
+
+    //                     var postData = {
+                        
+    //                         "image" : downloadUrl,
+    //                         // "name" : fileCompleteName,
+    //                         "name" : name,
+    //                         "desc" : desc,
+    //                         "title" :title,
+    //                         "uid" :user.uid,
+    //                         "counter" : 5000 - counter,
+    //                         "username" : userName,
+    //                         "time": time.toLocaleDateString('Taiwan',{hour:"numeric",minute:"numeric", hour12:true}),
+    //                         "date" : time.toLocaleDateString('Taiwan',options),
+    //                     };
+    //                     // console.log(options,postData);
+    //                     console.log(userName);
+    //                     var newPostRef = databaseRef.push();
+
+    //                     newPostRef.set(postData, function(err){
+    //                         if (err){
+    //                             console.log("失敗");
+    //                             $("#result").attr("class", "alert alert-danger");
+    //                             $("#result").html(err.message);
+    //                         }
+    //                         else {
+    //                             console.log("成功");
+    //                             $("#result").attr("class", "alert alert-success");
+    //                             $("#result").html("成功上傳貼文!");
+    //                             // $("#modal-create").modal('remove');
+    //                             window.open("","_self");
+    //                         }
+    //                         resetForm();
+    //                     });
+    //                 });
+    //             }
+                
+    //         )
+    //     });        
+    // });
+    
+    // function resetForm(){
+        
+    //     $("#create-post")[0].reset();
+    //     $("#selected-image").fadeOut();
+    //     $("#upload-progress").html("completed");
+    // }
     // retrieve and display from database
     var user = firebase.auth().currentUser;
     var dbblogs = firebase.database().ref().child("blog").orderByChild("uid").equalTo(user.uid);
-
+    var postlist = [];
     dbblogs.on("value",function(post){
-        
+        // console.log(post.key);
         if (post.exists){
             var postHtml = "";
+            var i=0
             post.forEach(function(singlepost){
+                var post = {
+                    'content': singlepost.val().desc,
+                    'title': singlepost.val().title,
+                    'image':singlepost.val().image,
+                    'name' : singlepost.val().name,
+                    
+                };
+                // console.log(singlepost);
+                // console.log(singlepost.key);
+                postlist.push(post);
                 counter = counter + 1;
                 postHtml += "<div class='jumbotron bg-light text-dark border border-dark post-card'>";
-                
-                // postHtml += "<div class='form-group' style='text-align:center;'>";
-                //     postHtml += "<button class='form-control btn-light bg-dark text-white'>刪除文章</button>"
-                // postHtml += "</div><br>"
-                // postHtml += "<div class='form-group' style='text-align:center;'>";
-                    postHtml += "<button class='btn btn-secondary' onclick=deletepost('"+singlepost.key+"') style='float:right;'>刪除文章</button>";
+
+                    postHtml += "<button class='btn btn-secondary' onclick=deletepost('"+singlepost.key+"') style='float:right;margin:10px 10px;'>刪除文章</button>";
+                    
+                    postHtml += "<button type='button' class='btn btn-secondary' onclick=updatepost('"+i+"');sendkey('"+singlepost.key+"'); data-toggle='modal' data-target='#modal-update' style='float:right;margin:10px 10px;'>編輯文章</button>";
+                    // postHtml += "<button type='button' class='btn btn-secondary' onclick=updatepost('"+i+"') data-toggle='modal' data-target='#modal-update' style='float:right;margin:10px 10px;'>編輯文章</button>";
                 // postHtml += "</div><br>"
                 postHtml += "<div><img class='post-image' src='";
-                    postHtml += singlepost.val().image;
+                postHtml += singlepost.val().image;
                 postHtml += "'  /> </div> <br>";
 
                 postHtml += "<div class='row' style='margin-top:30px;margin-bottom:0;'>";
@@ -195,23 +401,24 @@
                 postHtml   += "</p> <br>";
 
                 postHtml += "</div>";
+                // $('#update-title').val(singlepost.val().title);
+                // updatepost(singlepost.key).then(function(t) {
+                //     old_title = t;
+                //     $('#update-title').val(old_title);
+                    
+                // })
+                // console.log(title)
+                i++;
             });
             $('#post').html(postHtml);
+            
         }
         
-    })
-
-    // if (!exist){
-    //         var content = "";
-    //         content += "<h3 style='font-weight:bold;'>沒有新貼文喔~~</h3>";
-    //         content += "<h3 style='font-size:20px;'>快去新增貼文吧><</h style='font-size:20px;'>";
-    //         content += "<div style='height:200px;'></div>";
-    //         $('#post').html(content);
-    // }
+    });
 
     function deletepost(key){
         var deleteRef = firebase.database().ref().child("blog").child(key);
-
+        
         return deleteRef.remove()
         .then(function(){
             window.alert("刪除成功!!!");
@@ -220,7 +427,18 @@
             console.log("Error Occurred.");
         });
     }
-    // console.log(exist);
-    ///////retrieve end here
+ 
+    function updatepost(id) {
+        $('#update-title').val(postlist[id]['title']);
+        $('#update-content').val(postlist[id]['content']);
+        $('#selected2-image').attr("src",postlist[id]['image']);
+        // presentkey = key;
+        // $('#update-image').val(postlist[id]['name'])
+    }
+    function sendkey(key){
+        presentkey = key;
+    }
 </script>
+
+
 <div style='height:200px;'></div>
