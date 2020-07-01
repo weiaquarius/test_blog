@@ -419,13 +419,31 @@
     function deletepost(key){
         var deleteRef = firebase.database().ref().child("blog").child(key);
         
-        return deleteRef.remove()
-        .then(function(){
-            window.alert("刪除成功!!!");
-            console.log("Removed Successfully!");
-        }).catch(function(){
-            console.log("Error Occurred.");
-        });
+        Swal.fire({
+            title: '確定刪除?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: '確定刪除'
+            }).then((result) => {
+            if (result.value) {
+                return deleteRef.remove().then(function(){
+                    Swal.fire(
+                    '成功刪除!',
+                    'success'
+                    )
+                });
+                
+            }
+        })
+        // return deleteRef.remove()
+        // .then(function(){
+        //     // window.alert("刪除成功!!!");
+        //     console.log("Removed Successfully!");
+        // }).catch(function(){
+        //     console.log("Error Occurred.");
+        // });
     }
  
     function updatepost(id) {
@@ -439,6 +457,6 @@
         presentkey = key;
     }
 </script>
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
 <div style='height:200px;'></div>

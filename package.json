@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/weiaquarius/test_blog.github.io/issues"
   },
-  "homepage": "https://github.com/weiaquarius/test_blog.github.io#readme"
+  "homepage": "https://github.com/weiaquarius/test_blog.github.io#readme",
+  "dependencies": {
+    "sweetalert2": "^9.15.2"
+  }
 }

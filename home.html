@@ -41,105 +41,105 @@
 
     $("#save-post").click(function(){
     
-    var title = $("#title").val();
-    var desc = $("#main-desc").val();
-    var picture = $("#main-image").prop("files")[0];
+        var title = $("#title").val();
+        var desc = $("#main-desc").val();
+        var picture = $("#main-image").prop("files")[0];
 
-    $("#main-desc").removeClass("is-invalid");
-    $("#title").removeClass("is-invalid");
-    $("#main-image").removeClass("is-invalid");
-    
-    if (!title){
+        $("#main-desc").removeClass("is-invalid");
+        $("#title").removeClass("is-invalid");
+        $("#main-image").removeClass("is-invalid");
         
-        $("#title").addClass("is-invalid");
-        return;
-    }
-    if (!desc){
-        $("#main-desc").addClass("is-invalid");
-        return;
-    }
-    if (picture == null){
-        $("#main-image").addClass("is-invalid");
-        return;
-    }
-    if($.inArray(picture["type"], validImagetypes)<0){
-        $("#main-image").addClass("is-invalid");
-        return;
-    }
-
-    // Upload and save to firebase
-    
-    var databaseRef = firebase.database().ref().child("blog");
-
-    databaseRef.once("value").then(function(snapshot){
-        var name = picture['name'];
-        var dataStr = new Date().getTime();
-        var fileCompleteName = name + "_" + dataStr;
-        
-        var storageRef = firebase.storage().ref("post images");
-        var poststorageRef = storageRef.child(fileCompleteName);
-
-        var uploadTask = poststorageRef.put(picture);
-
-        uploadTask.on("state_changed",
-        
-            function progress(snapshot){
-            var percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            $("#upload-progress").html(Math.round(percentage) + "%");
-            $("#upload-progress").attr("style", "width:" + percentage + "%");
-            },
-            function error(err){
+        if (!title){
             
-            },
-            function complete(){
-            var user = firebase.auth().currentUser;
-            var userName;
-            firebase.database().ref('Users/' + user.uid).once('value').then(function(snapshot){
-                var fName = (snapshot.val() && snapshot.val().username);
-                userName = fName;
-            });
-            console.log(userName);
-            uploadTask.snapshot.ref.getDownloadURL().then(function(downloadUrl){
-                var time = new Date();
+            $("#title").addClass("is-invalid");
+            return;
+        }
+        if (!desc){
+            $("#main-desc").addClass("is-invalid");
+            return;
+        }
+        if (picture == null){
+            $("#main-image").addClass("is-invalid");
+            return;
+        }
+        if($.inArray(picture["type"], validImagetypes)<0){
+            $("#main-image").addClass("is-invalid");
+            return;
+        }
 
-                var options = {
-                year:"numeric",
-                month:"long",
-                day:"2-digit",
-                weekday:"long",
-                };
+        // Upload and save to firebase
+        
+        var databaseRef = firebase.database().ref().child("blog");
 
-                var postData = {
+        databaseRef.once("value").then(function(snapshot){
+            var name = picture['name'];
+            var dataStr = new Date().getTime();
+            var fileCompleteName = name + "_" + dataStr;
+            
+            var storageRef = firebase.storage().ref("post images");
+            var poststorageRef = storageRef.child(fileCompleteName);
+
+            var uploadTask = poststorageRef.put(picture);
+
+            uploadTask.on("state_changed",
+            
+                function progress(snapshot){
+                var percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    $("#upload-progress").html(Math.round(percentage) + "%");
+                    $("#upload-progress").attr("style", "width:" + percentage + "%");
+                },
+                function error(err){
                 
-                "image" : downloadUrl,
-                "name" : fileCompleteName,
-                "desc" : desc,
-                "title" :title,
-                "uid" :user.uid,
-                "counter" : 5000 - counter,
-                "username" : userName,
-                "time": time.toLocaleDateString('Taiwan',{hour:"numeric",minute:"numeric", hour12:true}),
-                "date" : time.toLocaleDateString('Taiwan',options),
-                };
-                // console.log(options,postData);
-                console.log(userName);
-                var newPostRef = databaseRef.push();
-
-                newPostRef.set(postData, function(err){
-                if (err){
-                    console.log("失敗");
-                    $("#result").attr("class", "alert alert-danger");
-                    $("#result").html(err.message);
-                }
-                else {
-                    console.log("成功");
-                    $("#result").attr("class", "alert alert-success");
-                    $("#result").html("成功上傳貼文!");
-                    // $("#modal-create").modal('remove');
-                    window.open("","_self");
-                }
-                resetForm();
+                },
+                function complete(){
+                var user = firebase.auth().currentUser;
+                var userName;
+                firebase.database().ref('Users/' + user.uid).once('value').then(function(snapshot){
+                    var fName = (snapshot.val() && snapshot.val().username);
+                    userName = fName;
                 });
+                console.log(userName);
+                uploadTask.snapshot.ref.getDownloadURL().then(function(downloadUrl){
+                    var time = new Date();
+
+                    var options = {
+                        year:"numeric",
+                        month:"long",
+                        day:"2-digit",
+                        weekday:"long",
+                    };
+
+                    var postData = {
+                        
+                        "image" : downloadUrl,
+                        "name" : fileCompleteName,
+                        "desc" : desc,
+                        "title" :title,
+                        "uid" :user.uid,
+                        "counter" : 5000 - counter,
+                        "username" : userName,
+                        "time": time.toLocaleDateString('Taiwan',{hour:"numeric",minute:"numeric", hour12:true}),
+                        "date" : time.toLocaleDateString('Taiwan',options),
+                    };
+                    // console.log(options,postData);
+                    console.log(userName);
+                    var newPostRef = databaseRef.push();
+
+                    newPostRef.set(postData, function(err){
+                    if (err){
+                        console.log("失敗");
+                        $("#result").attr("class", "alert alert-danger");
+                        $("#result").html(err.message);
+                    }
+                    else {
+                        console.log("成功");
+                        $("#result").attr("class", "alert alert-success");
+                        $("#result").html("成功上傳貼文!");
+                        // $("#modal-create").modal('remove');
+                        window.open("","_self");
+                    }
+                    resetForm();
+                    });
             });
             }
         );
@@ -171,7 +171,7 @@ function resetForm(){
 // retrieve and display from database
 
 var dbblogs = firebase.database().ref().child("blog").orderByChild("counter");
-
+var user = firebase.auth().currentUser;
 dbblogs.on("value",function(post){
     if (post.exists){
     var postHtml = "";
@@ -205,10 +205,79 @@ dbblogs.on("value",function(post){
         postHtml   += "</p> <br>";
 
         postHtml += "</div>";
+
+        postHtml += "<div class='message_box' id='messageBox'></div>";
+        postHtml += "<div style='margin-bottom:100px;'><input id='myInput' type='text' placeholder='請輸入留言'><button id='doPost'>提交</button></div>";
+                        
     });
     $('#post').html(postHtml);
     }
 })
+$('#doPost').click(function(){
+    var text = $('#messageBox').val();
+    if (!text){
+        $('#messageBox').addClass("is-invalid");
+    }
+    var databaseRef = firebase.database().ref().child("message");
+    databaseRef.once("value").then(function(snapshot){
+        var time = new Date();
+        var options = {
+            year:"numeric",
+            month:"long",
+            day:"2-digit",
+            weekday:"long",
+        };
+        var postData = {
+                        
+            "text" : text,
+            "uid" :user.uid,
+            "counter" : 5000 - counter,
+            "username" : userName,
+            "time": time.toLocaleDateString('Taiwan',{hour:"numeric",minute:"numeric", hour12:true}),
+            "date" : time.toLocaleDateString('Taiwan',options),
+        };
+        var newPostRef = databaseRef.push(); 
+        newPostRef.set(postData, function(err){
+            if (err){
+                // console.log("失敗");
+                // $("#result").attr("class", "alert alert-danger");
+                $("#result").html(err.message);
+            }
+            else {
+                Swal.fire(
+                    '成功',
+                    'success'
+                )
+                // console.log("成功");
+                // $("#result").html("成功上傳留言!");
+                // $("#modal-create").modal('remove');
+                window.open("","_self");
+            }
+        })
+    })
+})
+// var oMessageBox = document.getElementById("messageBox");
+// var oInput = document.getElementById("myInput");
+// var oPostBtn = document.getElementById("doPost");
+
+// oPostBtn.onclick = function(){
+//     if(oInput.value){
+//         //寫入發表留言的時間
+//         var oTime = document.createElement("div");
+//         oTime.className = "time";
+//         var myDate = new  Date();
+//         oTime.innerHTML = myDate.toLocaleString();
+//         oMessageBox.appendChild(oTime);
+        
+//         //寫入留言內容
+//         var oMessageContent = document.createElement("div");
+//         oMessageContent.className = "message_content";
+//         oMessageContent.innerHTML = oInput.value;
+//         oInput.value = "";
+//         oMessageBox.appendChild(oMessageContent);
+//     }
+    
+// }
 
 
 ///////retrieve end here
