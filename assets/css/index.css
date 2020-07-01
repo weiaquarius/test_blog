@@ -420,3 +420,33 @@ textarea:-webkit-autofill:focus {
     font-size: 17px;
   }
 }
+
+
+/* sweetalert */
+.swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=right]{
+  right:1.2em !important;
+}
+.swal2-icon.swal2-error [class^=swal2-x-mark-line]{
+  top:3.2em !important;
+  width: 4.1em !important;
+}
+.swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=left]{
+  right:1.13em !important;
+}
+
+
+/* success icon */
+.swal2-icon.swal2-success [class^=swal2-success-line][class$=long]{
+  top:2.975em !important;
+  right:-0.1em !important;
+  width:4.4372em !important; 
+}
+.swal2-icon.swal2-success [class^=swal2-success-line][class$=tip] {
+  top:3.55em !important;
+  width:2.825em !important;
+}
+.swal2-icon.swal2-success.swal2-icon-show .swal2-success-line-tip{
+  animation: 0s !important;
+}
+
+

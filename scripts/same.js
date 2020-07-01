@@ -29,10 +29,12 @@ $("#btn-resetPassword").click(function(){
         console.log(errorCode);
         console.log(errorMessage);
   
-        window.alert("訊息: " + errorMessage);
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: errorMessage
+        })
       });
-    }else{
-      window.alert("請輸入郵件");
     }
 });
 
@@ -43,17 +45,29 @@ $("#btn-login").click(function(){
   var password = $("#login-password").val();  
   if (email != "" && password !=""){
     var result = firebase.auth().signInWithEmailAndPassword(email,password);
-    result.catch(function(error){
+    result.then(function(){
+      Swal.fire({
+        icon: 'success',
+        title:'登入成功'
+      })
+    }).catch(function(error){
       var errorCode = error.code;
       var errorMessage = error.message;
 
       console.log(errorCode);
       console.log(errorMessage);
 
-      window.alert("訊息: " + errorMessage);
+      // window.alert("訊息: " + errorMessage);
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: errorMessage
+      })
     });
   }else{
-    window.alert("填寫未完成，請輸入資料");
+    Swal.fire({
+      text: "填寫未完成，請填寫資料!!!"
+    })
   }
 });
 
@@ -66,22 +80,37 @@ $("#btn-signup").click(function(){
     if (password == cpassword){
       var result = firebase.auth().createUserWithEmailAndPassword(email,password);
       console.log("B");  
-      result.catch(function(error){
+      result.then(function(){
+        Swal.fire({
+          icon: 'success',
+          title:'註冊成功'
+        })
+      }).catch(function(error){
       var errorCode = error.code;
       var errorMessage = error.message;
 
       console.log(errorCode);
       console.log(errorMessage);
 
-      window.alert("訊息: " + errorMessage);
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: errorMessage
+      })
       });
       // window.alert("註冊成功!接下來是帳號設定!");
     }
     else {
-      window.alert("兩次輸入密碼不同，麻煩再輸入一次!!!");
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text:'兩次密碼輸入不同，麻煩再輸入一次!!'
+      })
     }
   }else{
-    window.alert("填寫未完成，請輸入資料");
+    Swal.fire({
+      text: "填寫未完成，請填寫資料!!!"
+    })
   }
 });
 
